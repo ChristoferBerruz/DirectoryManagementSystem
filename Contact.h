@@ -10,7 +10,7 @@ private:
 	string name;
 public:
 	Contact(const string& name);
-	virtual void display() const;
+	virtual void Display() const;
 };
 #endif // !CONTACT_H
 

@@ -15,8 +15,8 @@ public:
 	PersonPhoneContact(const string& fullName, const string& gender, const string& phoneNum);
 	PersonPhoneContact(const string& fullName, const string& gender);
 
-	void addPhoneNumber(const string& phoneNum);
-	virtual void display() const;
+	void AddPhoneNumber(const string& phoneNum);
+	virtual void Display() const;
 };
 #endif // !PERSON_PHONE_CONTACT_H
 

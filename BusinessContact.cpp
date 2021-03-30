@@ -9,8 +9,8 @@ BusinessContact::BusinessContact(const string& name, const string& category)
 
 }
 
-void BusinessContact::display() const
+void BusinessContact::Display() const
 {
-	Contact::display();
+	Contact::Display();
 	cout << "Category: " << category << endl;
 }

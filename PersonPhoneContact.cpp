@@ -10,17 +10,17 @@ PersonPhoneContact::PersonPhoneContact(const string& fullName, const string& gen
 PersonPhoneContact::PersonPhoneContact(const string& fullName, const string& gender, const string& phoneNum)
 	:PersonPhoneContact(fullName, gender)
 {
-	addPhoneNumber(phoneNum);
+	AddPhoneNumber(phoneNum);
 }
 
-void PersonPhoneContact::addPhoneNumber(const string& phoneNum)
+void PersonPhoneContact::AddPhoneNumber(const string& phoneNum)
 {
 	phoneNumbers.push_back(phoneNum);
 }
 
-void PersonPhoneContact::display() const
+void PersonPhoneContact::Display() const
 {
-	PersonContact::display();
+	PersonContact::Display();
 	cout << "Phone numbers: ";
 	for_each(phoneNumbers.begin(), phoneNumbers.end(), [](const string& phoneNum) 
 		{

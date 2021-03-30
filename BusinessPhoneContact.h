@@ -21,8 +21,8 @@ public:
 		const string& businessName,
 		const string& businessType
 	);
-	void addPhoneNumber(const string& phoneNum);
-	virtual void display() const;
+	void AddPhoneNumber(const string& phoneNum);
+	virtual void Display() const;
 };
 
 #endif // !BUSINESS_PHONE_CONTACT_H

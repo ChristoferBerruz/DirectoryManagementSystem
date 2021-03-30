@@ -15,6 +15,6 @@ public:
 		const string& address
 	);
 
-	virtual void display() const;
+	virtual void Display() const;
 };
 #endif // !BUSINESS_ADDRESS_CONTACT_H

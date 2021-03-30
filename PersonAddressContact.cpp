@@ -8,8 +8,8 @@ PersonAddressContact::PersonAddressContact(const string& fullName, const string&
 
 }
 
-void PersonAddressContact::display() const
+void PersonAddressContact::Display() const
 {
-	PersonContact::display();
+	PersonContact::Display();
 	cout << "Address: " << address << endl;
 }

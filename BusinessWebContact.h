@@ -18,9 +18,9 @@ public:
 		const string& website
 	);
 
-	void addEmail(const string& email);
-	void addWebsite(const string& website);
+	void AddEmail(const string& email);
+	void AddWebsite(const string& website);
 
-	virtual void display() const;
+	virtual void Display() const;
 };
 #endif // !BUSINESS_WEB_CONTACT_H

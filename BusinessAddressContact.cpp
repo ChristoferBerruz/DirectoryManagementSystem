@@ -11,8 +11,8 @@ BusinessAddressContact::BusinessAddressContact(
 
 }
 
-void BusinessAddressContact::display() const
+void BusinessAddressContact::Display() const
 {
-	BusinessContact::display();
+	BusinessContact::Display();
 	cout << "Address: " << address << endl;
 }

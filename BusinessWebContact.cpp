@@ -18,23 +18,23 @@ BusinessWebContact::BusinessWebContact
 	const string& website
 ):BusinessWebContact(businessName, businessType)
 {
-	addEmail(email);
-	addWebsite(website);
+	AddEmail(email);
+	AddWebsite(website);
 }
 
-void BusinessWebContact::addEmail(const string& email)
+void BusinessWebContact::AddEmail(const string& email)
 {
 	emailAddresses.push_back(email);
 }
 
-void BusinessWebContact::addWebsite(const string& website)
+void BusinessWebContact::AddWebsite(const string& website)
 {
 	websites.push_back(website);
 }
 
-void BusinessWebContact::display() const
+void BusinessWebContact::Display() const
 {
-	BusinessContact::display();
+	BusinessContact::Display();
 	cout << "Web addresses: ";
 	
 	for_each(websites.begin(), websites.end(), [](const string& website)

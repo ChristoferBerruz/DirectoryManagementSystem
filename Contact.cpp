@@ -8,7 +8,7 @@ Contact::Contact(const string& name) :name(name)
 
 }
 
-void Contact::display() const
+void Contact::Display() const
 {
 	cout << "Name: " << name << endl;
 }

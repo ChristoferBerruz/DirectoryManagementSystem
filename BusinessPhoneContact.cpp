@@ -19,18 +19,18 @@ BusinessPhoneContact::BusinessPhoneContact(
 	const string& phoneNum
 ) : BusinessPhoneContact(businessName, businessType)
 {
-	addPhoneNumber(phoneNum);
+	AddPhoneNumber(phoneNum);
 }
 
-void BusinessPhoneContact::addPhoneNumber(const string& phoneNum) 
+void BusinessPhoneContact::AddPhoneNumber(const string& phoneNum) 
 {
 	phoneNumbers.push_back(phoneNum);
 }
 
 
-void BusinessPhoneContact::display() const
+void BusinessPhoneContact::Display() const
 {
-	BusinessContact::display();
+	BusinessContact::Display();
 
 	cout << "Phone Numbers: ";
 

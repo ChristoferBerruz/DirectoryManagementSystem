@@ -6,7 +6,7 @@ using namespace std;
 PersonEmailContact::PersonEmailContact(const string& fullName, const string& gender, const string& email) 
 	: PersonEmailContact(fullName, gender)
 {
-	addEmail(email);
+	AddEmail(email);
 }
 
 PersonEmailContact::PersonEmailContact(const string& fullName, const string& gender)
@@ -15,14 +15,14 @@ PersonEmailContact::PersonEmailContact(const string& fullName, const string& gen
 
 }
 
-void PersonEmailContact::addEmail(const string& email)
+void PersonEmailContact::AddEmail(const string& email)
 {
 	emailAddresses.push_back(email);
 }
 
-void PersonEmailContact::display() const
+void PersonEmailContact::Display() const
 {
-	PersonContact::display();
+	PersonContact::Display();
 
 	cout << "Emails: ";
 

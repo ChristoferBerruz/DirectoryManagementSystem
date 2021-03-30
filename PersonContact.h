@@ -11,7 +11,7 @@ private:
 	string gender;
 public:
 	PersonContact(const string& fullName, const string& gender);
-	virtual void display() const;
+	virtual void Display() const;
 };
 
 #endif // !PERSON_CONTACT_H

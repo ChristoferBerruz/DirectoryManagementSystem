@@ -9,8 +9,8 @@ PersonContact::PersonContact(const string& fullName, const string& gender) :Cont
 
 }
 
-void PersonContact::display() const
+void PersonContact::Display() const
 {
-	Contact::display();
+	Contact::Display();
 	cout << "Gender: " << gender << endl;
 }

@@ -18,7 +18,7 @@ int main()
 	contacts[4] = new PersonEmailContact("Susana", "Female", "susana@gmail.com");
 	contacts[5] = new PersonPhoneContact("Vladimir", "Male", "1-176-320-8624");
 	for (int i = 0; i < 6; i++) {
-		contacts[i]->display();
+		contacts[i]->Display();
 		cout << "--------------------------" << endl;
 	}
 	return 0;
