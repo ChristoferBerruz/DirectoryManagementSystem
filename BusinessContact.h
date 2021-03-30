@@ -8,9 +8,9 @@ using namespace std;
 class BusinessContact : public Contact
 {
 private:
-	string businessType;
+	string category;
 public:
-	BusinessContact(const string& businessName = "FakeBusiness", const string& businessType = "Law Firm");
+	BusinessContact(const string& name, const string& category);
 	virtual void display() const;
 };
 #endif // !BUSINESS_CONTACT_H

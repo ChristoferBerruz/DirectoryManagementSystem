@@ -3,8 +3,8 @@
 #include <iostream>
 
 using namespace std;
-BusinessContact::BusinessContact(const string& businessName, const string& businessType)
-	:Contact(businessName), businessType(businessType)
+BusinessContact::BusinessContact(const string& name, const string& category)
+	:Contact(name), category(category)
 {
 
 }
@@ -12,5 +12,5 @@ BusinessContact::BusinessContact(const string& businessName, const string& busin
 void BusinessContact::display() const
 {
 	Contact::display();
-	cout << "Business Type: " << businessType << endl;
+	cout << "Category: " << category << endl;
 }
