@@ -144,7 +144,10 @@
     <ClInclude Include="BusinessPhoneContact.h" />
     <ClInclude Include="BusinessWebContact.h" />
     <ClInclude Include="Contact.h" />
+    <ClInclude Include="PersonAddressContact.h" />
     <ClInclude Include="PersonContact.h" />
+    <ClInclude Include="PersonEmailContact.h" />
+    <ClInclude Include="PersonPhoneContact.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BusinessAddressContact.cpp" />
@@ -153,7 +156,10 @@
     <ClCompile Include="BusinessWebContact.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PersonAddressContact.cpp" />
     <ClCompile Include="PersonContact.cpp" />
+    <ClCompile Include="PersonEmailContact.cpp" />
+    <ClCompile Include="PersonPhoneContact.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
