@@ -11,7 +11,7 @@ private:
 public:
 	BusinessAddressContact(
 		const string& businessName,
-		const string businessType,
+		const string& businessType,
 		const string& address
 	);
 
