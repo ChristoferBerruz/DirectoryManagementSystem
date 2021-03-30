@@ -16,7 +16,7 @@ BusinessWebContact::BusinessWebContact
 	const string& businessType,
 	const string& email,
 	const string& website
-):BusinessContact(businessName, businessType)
+):BusinessWebContact(businessName, businessType)
 {
 	addEmail(email);
 	addWebsite(website);

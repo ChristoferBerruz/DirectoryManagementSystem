@@ -17,7 +17,7 @@ BusinessPhoneContact::BusinessPhoneContact(
 	const string& businessName,
 	const string& businessType,
 	const string& phoneNum
-) : BusinessContact(businessName, businessType)
+) : BusinessPhoneContact(businessName, businessType)
 {
 	addPhoneNumber(phoneNum);
 }
