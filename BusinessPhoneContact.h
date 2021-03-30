@@ -13,9 +13,9 @@ private:
 	vector<string> phoneNumbers;
 public:
 	BusinessPhoneContact(
-		const string& phoneNum,
 		const string& businessName,
-		const string& businessType
+		const string& businessType,
+		const string& phoneNum
 	);
 	BusinessPhoneContact(
 		const string& businessName,
