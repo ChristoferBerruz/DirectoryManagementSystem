@@ -35,7 +35,7 @@ void BusinessWebContact::AddWebsite(const string& website)
 void BusinessWebContact::Display() const
 {
 	BusinessContact::Display();
-	cout << "Web addresses: ";
+	cout << "Web Addresses: ";
 	
 	for_each(websites.begin(), websites.end(), [](const string& website)
 		{
@@ -45,7 +45,7 @@ void BusinessWebContact::Display() const
 	
 	cout << endl;
 
-	cout << "Email addresses: ";
+	cout << "Email Addresses: ";
 	for_each(emailAddresses.begin(), emailAddresses.end(), [](const string& email)
 		{
 			cout << email << " ";

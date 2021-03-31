@@ -24,7 +24,7 @@ void PersonEmailContact::Display() const
 {
 	PersonContact::Display();
 
-	cout << "Emails: ";
+	cout << "Email Addresses: ";
 
 	for_each(emailAddresses.begin(), emailAddresses.end(), [](const string& email) 
 		{

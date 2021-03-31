@@ -21,7 +21,7 @@ void PersonPhoneContact::AddPhoneNumber(const string& phoneNum)
 void PersonPhoneContact::Display() const
 {
 	PersonContact::Display();
-	cout << "Phone numbers: ";
+	cout << "Phone Numbers: ";
 	for_each(phoneNumbers.begin(), phoneNumbers.end(), [](const string& phoneNum) 
 		{
 			cout << phoneNum << " ";
