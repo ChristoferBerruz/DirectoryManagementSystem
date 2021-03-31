@@ -1,4 +1,3 @@
-#include "Contact.h"
 #include "PersonContact.h"
 
 #include <iostream>

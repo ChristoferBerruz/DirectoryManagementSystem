@@ -21,5 +21,11 @@ int main()
 		contacts[i]->Display();
 		cout << "--------------------------------" << endl;
 	}
+
+	// Deallocate heap memory
+	for (int i = 0; i < 6; i++)
+	{
+		delete contacts[i];
+	}
 	return 0;
 }

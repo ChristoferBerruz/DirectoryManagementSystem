@@ -1,5 +1,4 @@
 #include "BusinessContact.h"
-#include "Contact.h"
 #include <iostream>
 
 using namespace std;
