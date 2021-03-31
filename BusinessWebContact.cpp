@@ -22,6 +22,17 @@ BusinessWebContact::BusinessWebContact
 	AddWebsite(website);
 }
 
+BusinessWebContact::BusinessWebContact
+(
+	const string& businessName,
+	const string& businessType,
+	const string& website
+):BusinessWebContact(businessName, businessType)
+{
+	AddWebsite(website);
+}
+
+
 void BusinessWebContact::AddEmail(const string& email)
 {
 	emailAddresses.push_back(email);

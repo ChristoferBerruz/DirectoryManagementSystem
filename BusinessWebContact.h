@@ -17,7 +17,11 @@ public:
 		const string& email,
 		const string& website
 	);
-
+	BusinessWebContact(
+		const string& businessName,
+		const string& businessType,
+		const string& website
+	);
 	void AddEmail(const string& email);
 	void AddWebsite(const string& website);
 
