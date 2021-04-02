@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Address.h" />
     <ClInclude Include="BusinessAddressContact.h" />
     <ClInclude Include="BusinessContact.h" />
     <ClInclude Include="BusinessPhoneContact.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="PersonPhoneContact.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Address.cpp" />
     <ClCompile Include="BusinessAddressContact.cpp" />
     <ClCompile Include="BusinessContact.cpp" />
     <ClCompile Include="BusinessPhoneContact.cpp" />
