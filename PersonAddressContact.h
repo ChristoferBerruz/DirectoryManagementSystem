@@ -3,14 +3,15 @@
 
 #include "PersonContact.h"
 #include <string>
+#include "Address.h"
 using namespace std;
 
 class PersonAddressContact : public PersonContact
 {
 private:
-	string address;
+	Address address;
 public:
-	PersonAddressContact(const string& fullName, const string& gender, const string& address);
+	PersonAddressContact(const string& fullName, const string& gender, const Address& address);
 	virtual void Display() const;
 };
 #endif // !PERSON_ADDRESS_CONTACT_H

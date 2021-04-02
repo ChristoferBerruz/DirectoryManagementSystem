@@ -2,7 +2,7 @@
 #include <iostream>
 
 using namespace std;
-PersonAddressContact::PersonAddressContact(const string& fullName, const string& gender, const string& address)
+PersonAddressContact::PersonAddressContact(const string& fullName, const string& gender, const Address& address)
 	: PersonContact(fullName, gender), address(address)
 {
 

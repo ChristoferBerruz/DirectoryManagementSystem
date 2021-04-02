@@ -5,7 +5,7 @@ using namespace std;
 BusinessAddressContact::BusinessAddressContact(
 	const string& businessName,
 	const string& businessType,
-	const string& address
+	const Address& address
 ) :BusinessContact(businessName, businessType), address(address)
 {
 

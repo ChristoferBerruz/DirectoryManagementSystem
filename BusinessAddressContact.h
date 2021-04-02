@@ -3,16 +3,17 @@
 #define BUSINESS_ADDRESS_CONTACT_H
 
 #include "BusinessContact.h"
+#include "Address.h"
 class BusinessAddressContact:public BusinessContact
 {
 private:
-	string address;
+	Address address;
 
 public:
 	BusinessAddressContact(
 		const string& businessName,
 		const string& businessType,
-		const string& address
+		const Address& address
 	);
 
 	virtual void Display() const;
