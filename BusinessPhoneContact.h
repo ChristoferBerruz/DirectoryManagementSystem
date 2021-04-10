@@ -24,6 +24,7 @@ public:
 	void AddPhoneNumber(const string& phoneNum);
 	virtual void Display() const;
 
+	vector<string> GetPhoneNumbers() const { return phoneNumbers; }
 	virtual ~BusinessPhoneContact() {}
 };
 

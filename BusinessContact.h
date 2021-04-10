@@ -11,6 +11,7 @@ private:
 	string category;
 public:
 	BusinessContact(const string& name, const string& category);
+	string GetCategory() const { return category; }
 	virtual void Display() const;
 	virtual ~BusinessContact() {}
 };

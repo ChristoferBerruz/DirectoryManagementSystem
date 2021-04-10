@@ -1,6 +1,7 @@
 #include "QueryEngine.h"
 #include "PersonAddressContact.h"
 #include "PersonEmailContact.h"
+#include "BusinessPhoneContact.h"
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -70,6 +71,48 @@ map<string, int> CLIQueryEngine::SearchPersonByEmailOrderByGender(const vector<C
 	return res;
 }
 
+map<string, int> CLIQueryEngine::SearchQueryBusinessByPhoneNumberOrderByCategory(const vector<Contact*>& contacts)
+{
+	cout << "Please enter area code: ";
+
+	string areaCode;
+	cin >> areaCode;
+
+	map<string, int> res;
+
+	// For U.S. phone numbers
+	string targetAreaCode = "1-" + areaCode;
+
+	for_each(contacts.begin(), contacts.end(), [&areaCode, &res, &targetAreaCode](Contact* const& contact) 
+		{
+			BusinessPhoneContact* phoneContact = dynamic_cast<BusinessPhoneContact*>(contact);
+			if (phoneContact)
+			{
+				vector<string> phoneNums = phoneContact->GetPhoneNumbers();
+				vector<string>::iterator phone;
+				for (phone = phoneNums.begin(); phone != phoneNums.end(); phone++)
+				{
+					if (phone->rfind(targetAreaCode, 0) == 0)
+					{
+						// Found a match
+
+						string category = phoneContact->GetCategory();
+
+						if (res.find(category) == res.end())
+							res[category] = 0;
+
+						res[category] += 1;
+						break;
+					}
+				}
+			}
+		}
+	);
+
+	return res;
+	
+}
+
 string CLIQueryEngine::GenerateTable(const map<string, int>& queryResult, const string& label1, const string& label2)
 {
 	ostringstream buffer;
@@ -92,6 +135,8 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 	cout << "Available Search queries are:\n";
 	cout << "(1) Find the number of <name> ordered by state.\n";
 	cout << "(2) Find the number of people in the directory whose email domain is <domain> ordered by the gender.\n";
+	cout << "(3) Find the number of organizations in the directory whose " <<
+		"phone number start with the area code <areaCode> ordered by the organization category.\n";
 
 	cout << "Please enter a valid option: ";
 	string option;
@@ -109,6 +154,11 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 	{
 		queryRes = SearchPersonByEmailOrderByGender(contacts);
 		label1 = "Gender";
+	}
+	else if (option == "3")
+	{
+		queryRes = SearchQueryBusinessByPhoneNumberOrderByCategory(contacts);
+		label1 = "Category";
 	}
 	
 	string res = GenerateTable(queryRes, label1, label2);
