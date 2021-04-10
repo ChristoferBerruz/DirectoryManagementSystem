@@ -12,6 +12,7 @@ public:
 	string GetName() { return name; }
 	Contact(const string& name);
 	virtual void Display() const;
+	virtual ~Contact() {}
 };
 #endif // !CONTACT_H
 

@@ -13,5 +13,7 @@ private:
 public:
 	PersonAddressContact(const string& fullName, const string& gender, const Address& address);
 	virtual void Display() const;
+
+	virtual ~PersonAddressContact(){}
 };
 #endif // !PERSON_ADDRESS_CONTACT_H

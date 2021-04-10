@@ -18,5 +18,7 @@ public:
 	void AddEmail(const string& email);
 
 	virtual void Display() const;
+
+	virtual ~PersonEmailContact() {}
 };
 #endif // !PERSON_EMAIL_CONTACT_H

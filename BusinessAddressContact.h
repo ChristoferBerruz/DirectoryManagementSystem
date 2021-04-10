@@ -17,5 +17,7 @@ public:
 	);
 
 	virtual void Display() const;
+
+	virtual ~BusinessAddressContact() {}
 };
 #endif // !BUSINESS_ADDRESS_CONTACT_H

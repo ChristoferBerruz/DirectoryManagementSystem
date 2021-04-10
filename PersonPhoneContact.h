@@ -17,6 +17,7 @@ public:
 
 	void AddPhoneNumber(const string& phoneNum);
 	virtual void Display() const;
+	virtual ~PersonPhoneContact() {}
 };
 #endif // !PERSON_PHONE_CONTACT_H
 

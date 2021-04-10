@@ -12,5 +12,6 @@ private:
 public:
 	BusinessContact(const string& name, const string& category);
 	virtual void Display() const;
+	virtual ~BusinessContact() {}
 };
 #endif // !BUSINESS_CONTACT_H

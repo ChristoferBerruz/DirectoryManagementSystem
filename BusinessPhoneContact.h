@@ -23,6 +23,8 @@ public:
 	);
 	void AddPhoneNumber(const string& phoneNum);
 	virtual void Display() const;
+
+	virtual ~BusinessPhoneContact() {}
 };
 
 #endif // !BUSINESS_PHONE_CONTACT_H

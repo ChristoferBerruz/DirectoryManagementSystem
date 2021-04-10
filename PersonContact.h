@@ -10,8 +10,10 @@ class PersonContact : public Contact
 private:
 	string gender;
 public:
+	string GetGender() { return gender; }
 	PersonContact(const string& fullName, const string& gender);
 	virtual void Display() const;
+	virtual ~PersonContact(){}
 };
 
 #endif // !PERSON_CONTACT_H

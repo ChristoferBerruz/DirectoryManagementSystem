@@ -26,5 +26,7 @@ public:
 	void AddWebsite(const string& website);
 
 	virtual void Display() const;
+
+	virtual ~BusinessWebContact() {}
 };
 #endif // !BUSINESS_WEB_CONTACT_H
