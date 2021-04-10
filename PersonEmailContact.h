@@ -19,6 +19,8 @@ public:
 
 	virtual void Display() const;
 
+	vector<string> GetEmails() const { return emailAddresses; }
+
 	virtual ~PersonEmailContact() {}
 };
 #endif // !PERSON_EMAIL_CONTACT_H

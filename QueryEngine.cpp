@@ -1,5 +1,6 @@
 #include "QueryEngine.h"
 #include "PersonAddressContact.h"
+#include "PersonEmailContact.h"
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -34,6 +35,41 @@ map<string, int> CLIQueryEngine::SearchPersonByNameOrderByState(const vector<Con
 	return res;
 }
 
+map<string, int> CLIQueryEngine::SearchPersonByEmailOrderByGender(const vector<Contact*>& contacts)
+{
+	cout << "Please enter email domain: ";
+	string emailDomain;
+	cin >> emailDomain;
+
+	map<string, int> res;
+
+	for_each(contacts.begin(), contacts.end(), [&res, &emailDomain](Contact* const & contact) 
+		{
+			PersonEmailContact* emailContact = dynamic_cast<PersonEmailContact*>(contact);
+
+			if (emailContact)
+			{
+				vector<string> emails = emailContact->GetEmails();
+				vector<string>::iterator currentEmail;
+
+				for (currentEmail = emails.begin(); currentEmail != emails.end(); currentEmail++)
+				{
+					if (currentEmail->find(emailDomain) != string::npos)
+					{
+						if (res.find(emailContact->GetGender()) == res.end())
+							res[emailContact->GetGender()] = 0;
+
+						res[emailContact->GetGender()] += 1;
+						break;
+					}
+				}
+			}
+		}
+	);
+
+	return res;
+}
+
 string CLIQueryEngine::GenerateTable(const map<string, int>& queryResult, const string& label1, const string& label2)
 {
 	ostringstream buffer;
@@ -55,15 +91,27 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 {
 	cout << "Available Search queries are:\n";
 	cout << "(1) Find the number of <name> ordered by state.\n";
+	cout << "(2) Find the number of people in the directory whose email domain is <domain> ordered by the gender.\n";
 
 	cout << "Please enter a valid option: ";
 	string option;
 	cin >> option;
 
 	map<string, int> queryRes;
-	queryRes = SearchPersonByNameOrderByState(contacts);
-
-	string res = GenerateTable(queryRes, "Name", "State");
+	string label1;
+	string label2 = "Number";
+	if (option == "1")
+	{
+		queryRes = SearchPersonByNameOrderByState(contacts);
+		label1 = "State";
+	}
+	else if (option == "2")
+	{
+		queryRes = SearchPersonByEmailOrderByGender(contacts);
+		label1 = "Gender";
+	}
+	
+	string res = GenerateTable(queryRes, label1, label2);
 	cout << res;
 	return res;
 }
