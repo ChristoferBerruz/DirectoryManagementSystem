@@ -13,6 +13,7 @@ private:
 public:
 	PersonAddressContact(const string& fullName, const string& gender, const Address& address);
 	virtual void Display() const;
+	Address GetAddress() const { return address; }
 
 	virtual ~PersonAddressContact(){}
 };

@@ -282,6 +282,11 @@ void DirectoryManagementSystem::ShowAllContacts()
 	);
 }
 
+void DirectoryManagementSystem::Query()
+{
+	engine.Query(contacts);
+}
+
 istream& operator>>(istream& is, DirectoryManagementSystem dms) 
 {
 	dms.IngestData(is);

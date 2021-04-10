@@ -9,7 +9,7 @@ class Contact
 private:
 	string name;
 public:
-	string GetName() { return name; }
+	string GetName() const { return name; }
 	Contact(const string& name);
 	virtual void Display() const;
 	virtual ~Contact() {}

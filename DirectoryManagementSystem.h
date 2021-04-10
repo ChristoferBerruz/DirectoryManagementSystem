@@ -3,7 +3,7 @@
 
 #include "Contact.h"
 #include "Validator.h"
-//#include "QueryEngine.h"
+#include "QueryEngine.h"
 #include <map>
 #include <typeinfo>
 #include <vector>
@@ -16,6 +16,7 @@ private:
 	int totalContacts;
 	string queryResult;
 	Validator validator;
+	CLIQueryEngine engine;
 	map <string, Contact*> quickBook;
 	void CreateBusinessContact(const vector<string>& words);
 	void CreatePersonContact(const vector<string>& words);
@@ -24,8 +25,8 @@ private:
 	vector<string> ParseLine(const string& line);
 	string TrimString(const string& word);
 public:
-	//void Query();
-	//void DisplayResult();
+	void Query();
+	void DisplayResult();
 	~DirectoryManagementSystem();
 	void IngestData(istream& is);
 	void ShowAllContacts();
