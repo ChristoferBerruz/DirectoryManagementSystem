@@ -54,7 +54,7 @@ ostream& operator<<(ostream& os, Address address)
 	os << address.streetAddress << ", ";
 	os << address.city << ", ";
 	os << address.state << ", ";
-	os << address.zipcode << "\n";
+	os << address.zipcode;
 
 	return os;
 }
