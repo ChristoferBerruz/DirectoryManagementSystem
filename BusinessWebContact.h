@@ -25,6 +25,10 @@ public:
 	void AddEmail(const string& email);
 	void AddWebsite(const string& website);
 
+	vector<string> GetWebAddresses() const { return websites; }
+
+	vector<string> GetEmailAddresses() const { return emailAddresses; }
+
 	virtual void Display() const;
 
 	virtual ~BusinessWebContact() {}

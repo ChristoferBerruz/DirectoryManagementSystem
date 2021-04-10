@@ -2,6 +2,7 @@
 #include "PersonAddressContact.h"
 #include "PersonEmailContact.h"
 #include "BusinessPhoneContact.h"
+#include "BusinessWebContact.h"
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -113,6 +114,73 @@ map<string, int> CLIQueryEngine::SearchQueryBusinessByPhoneNumberOrderByCategory
 	
 }
 
+map<string, int> CLIQueryEngine::SearchQueryBusinessByEmailOrWebsiteOrderByCategory(const vector<Contact*>& contacts)
+{
+	cout << "Please enter emailEnding: ";
+	string emailEnding;
+	cin >> emailEnding;
+
+	cout << "Please enter websiteDomain: ";
+	string websiteDomain;
+	cin >> websiteDomain;
+
+	map<string, int> res;
+
+	for_each(contacts.begin(), contacts.end(), [&emailEnding, &websiteDomain, &res](Contact* const& contact) 
+		{
+			BusinessWebContact* webContact = dynamic_cast<BusinessWebContact*>(contact);
+			if (webContact)
+			{
+				vector<string> websites = webContact->GetWebAddresses();
+				vector<string>::iterator website;
+
+				// Bool to not double count the contact
+				bool previouslyAdded = false;
+
+				// Check the websites
+				for (website = websites.begin(); website != websites.end(); website++)
+				{
+					if (website->find(websiteDomain) != string::npos)
+					{
+						// Website contains domain, so take it
+						string category = webContact->GetCategory();
+
+						if (res.find(category) == res.end())
+							res[category] = 0;
+
+						res[category] += 1;
+						previouslyAdded = true;
+						break;
+					}
+				}
+
+				// Check the emails only if contact not previously counted
+				if (!previouslyAdded)
+				{
+					vector<string> emails = webContact->GetEmailAddresses();
+					vector<string>::iterator email;
+
+					for (email = emails.begin(); email != emails.end(); email++)
+					{
+						if (email->find(emailEnding) != string::npos)
+						{
+							string category = webContact->GetCategory();
+
+							if (res.find(category) == res.end())
+								res[category] = 0;
+
+							res[category] += 1;
+							break;
+						}
+					}
+				}
+			}
+		}
+	);
+
+	return res;
+}
+
 string CLIQueryEngine::GenerateTable(const map<string, int>& queryResult, const string& label1, const string& label2)
 {
 	ostringstream buffer;
@@ -133,10 +201,13 @@ string CLIQueryEngine::GenerateTable(const map<string, int>& queryResult, const 
 string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 {
 	cout << "Available Search queries are:\n";
-	cout << "(1) Find the number of <name> ordered by state.\n";
+	cout << "(1) Find the number of people with <name> ordered by state.\n";
 	cout << "(2) Find the number of people in the directory whose email domain is <domain> ordered by the gender.\n";
 	cout << "(3) Find the number of organizations in the directory whose " <<
 		"phone number start with the area code <areaCode> ordered by the organization category.\n";
+
+	cout << "(4) Find the number of organizations in the directory with a " <<
+		"<emailEnding> email or a <websiteDomain> website ordered by the organization category.\n";
 
 	cout << "Please enter a valid option: ";
 	string option;
@@ -158,6 +229,11 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 	else if (option == "3")
 	{
 		queryRes = SearchQueryBusinessByPhoneNumberOrderByCategory(contacts);
+		label1 = "Category";
+	}
+	else if (option == "4")
+	{
+		queryRes = SearchQueryBusinessByEmailOrWebsiteOrderByCategory(contacts);
 		label1 = "Category";
 	}
 	

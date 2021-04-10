@@ -11,7 +11,7 @@ private:
 	map<string, int> SearchPersonByNameOrderByState(const vector<Contact*>& contacts);
 	map<string, int> SearchPersonByEmailOrderByGender(const vector<Contact*>& contacts);
 	map<string, int> SearchQueryBusinessByPhoneNumberOrderByCategory(const vector<Contact*>& contacts);
-	map<string, int> SearchQueryBusinessByEmailOrderByCategory(const vector<Contact*>& contacts);
+	map<string, int> SearchQueryBusinessByEmailOrWebsiteOrderByCategory(const vector<Contact*>& contacts);
 	map<string, int> SearchQueryPeopleLivingInCTWithOutOfStatePhone(const vector<Contact*>& contacts);
 	string GenerateTable(const map<string, int>& queryResult, const string& label1, const string& label2);
 	string GetPersonInfo(const vector<Contact*>& contacts);
