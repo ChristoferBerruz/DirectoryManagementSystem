@@ -12,6 +12,18 @@
 
 using namespace std;
 
+/// <summary>
+/// Destructor needed because memory was allocated in the heap
+/// </summary>
+DirectoryManagementSystem::~DirectoryManagementSystem() 
+{
+	for_each(contacts.begin(), contacts.end(), [](Contact* contact)
+		{
+			delete contact;
+		}
+	);
+}
+
 
 /// <summary>
 /// Creates and adds one or multiple contacts on the vector depending

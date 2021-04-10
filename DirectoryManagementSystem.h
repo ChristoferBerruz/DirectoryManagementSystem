@@ -28,6 +28,7 @@ private:
 public:
 	//void Query();
 	//void DisplayResult();
+	~DirectoryManagementSystem();
 	void IngestData(istream& is);
 	void ShowAllContacts();
 	friend istream& operator>>(istream& is, DirectoryManagementSystem dms);
