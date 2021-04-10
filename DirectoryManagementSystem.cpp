@@ -23,20 +23,40 @@ void DirectoryManagementSystem::CreatePersonContact(const vector<string>& words)
 	vector<string>::const_iterator word;
 	string name = words[0];
 	string gender = words[1];
-	cout << "Saving..." << endl;
-	cout << name << ", " << gender << endl;
 	for (int i = 2; i < words.size(); i++)
 	{
 		string current = words[i];
 
 		if (validator.IsEmail(current))
 		{
-			contacts.push_back(new PersonEmailContact(name, gender, current));
+			Contact* contact = FindInQuickbook(name, typeid(PersonEmailContact).name());
+			if (!contact)
+			{
+				contact = new PersonEmailContact(name, gender, current);
+				AddToQuickbook(name, typeid(PersonEmailContact).name(), contact);
+				contacts.push_back(contact);
+			}else
+			{
+				PersonEmailContact* emailContact = dynamic_cast<PersonEmailContact*>(contact);
+				emailContact->AddEmail(current);
+			}
+
 
 		}
 		else if (validator.IsPhoneNumber(current))
 		{
-			contacts.push_back(new PersonPhoneContact(name, gender, current));
+			Contact* contact = FindInQuickbook(name, typeid(PersonPhoneContact).name());
+			if (!contact)
+			{
+				contact = new PersonPhoneContact(name, gender, current);
+				AddToQuickbook(name, typeid(PersonPhoneContact).name(), contact);
+				contacts.push_back(contact);
+			}else
+			{
+				PersonPhoneContact* phoneContact = dynamic_cast<PersonPhoneContact*>(contact);
+				phoneContact->AddPhoneNumber(current);
+			}
+
 		}
 		else {
 			// This is an address, read remaining
@@ -51,6 +71,24 @@ void DirectoryManagementSystem::CreatePersonContact(const vector<string>& words)
 	}
 }
 
+Contact* DirectoryManagementSystem::FindInQuickbook(const string& name, const string& contactType)
+{
+	string key = name + contactType;
+	if (quickBook.find(key) != quickBook.end())
+	{
+		return quickBook[key];
+	}
+	return NULL;
+}
+
+void DirectoryManagementSystem::AddToQuickbook(const string& name, const string& contactType, Contact* contact)
+{
+	string key = name + contactType;
+	if (quickBook.find(key) == quickBook.end())
+	{
+		quickBook[key] = contact;
+	}
+}
 
 /// <summary>
 /// A utility function to trim left and right whitespaces from a string
