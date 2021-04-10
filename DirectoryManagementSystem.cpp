@@ -4,6 +4,9 @@
 #include "PersonAddressContact.h"
 #include "PersonEmailContact.h"
 #include "PersonPhoneContact.h"
+#include "BusinessWebContact.h"
+#include "BusinessAddressContact.h"
+#include "BusinessPhoneContact.h"
 
 #include <sstream>
 #include <iostream>
@@ -79,6 +82,65 @@ void DirectoryManagementSystem::CreatePersonContact(const vector<string>& words)
 
 			Address address(street, district, state, zipcode);
 			contacts.push_back(new PersonAddressContact(name, gender, address));
+		}
+	}
+}
+
+
+/// <summary>
+/// Add BusinessContacts to the contacts
+/// </summary>
+/// <param name="words"></param>
+void DirectoryManagementSystem::CreateBusinessContact(const vector<string>& words)
+{
+	string name = words[0];
+	string category = words[1];
+	for (int i = 2; i < words.size(); i++)
+	{
+		string current = words[i];
+		if (validator.IsEmail(current) || validator.IsWebsite(current))
+		{
+			Contact* contact = FindInQuickbook(name, typeid(BusinessWebContact).name());
+			if (!contact)
+			{
+				contact = new BusinessWebContact(name, category);
+				AddToQuickbook(name, typeid(BusinessWebContact).name(), contact);
+				contacts.push_back(contact);
+			}
+
+			BusinessWebContact* webContact = dynamic_cast<BusinessWebContact*>(contact);
+
+			if (validator.IsEmail(current))
+				webContact->AddEmail(current);
+			else
+				webContact->AddWebsite(current);
+
+		}
+		else if (validator.IsPhoneNumber(current))
+		{
+			Contact* contact = FindInQuickbook(name, typeid(BusinessPhoneContact).name());
+			if (!contact)
+			{
+				contact = new BusinessPhoneContact(name, category, current);
+				AddToQuickbook(name, typeid(BusinessPhoneContact).name(), contact);
+				contacts.push_back(contact);
+			}
+			else
+			{
+				BusinessPhoneContact* phoneContact = dynamic_cast<BusinessPhoneContact*>(contact);
+				phoneContact->AddPhoneNumber(current);
+			}
+		}
+		else
+		{
+			// Address, read remaining
+			string street = words[i++];
+			string district = words[i++];
+			string state = words[i++];
+			string zipcode = words[i++];
+
+			Address address(street, district, state, zipcode);
+			contacts.push_back(new BusinessAddressContact(name, category, address));
 		}
 	}
 }
@@ -202,6 +264,10 @@ void DirectoryManagementSystem::IngestData(istream& is)
 		words = ParseLine(line);
 		if (contactType == "person") {
 			CreatePersonContact(words);
+		}
+		else if (contactType == "business")
+		{
+			CreateBusinessContact(words);
 		}
 	}
 }

@@ -17,9 +17,7 @@ private:
 	string queryResult;
 	Validator validator;
 	map <string, Contact*> quickBook;
-	//CLIQueryEngine engine;
-	//void CreateContact(const vector<string>& words, string contactType);
-	//void CreateBusinessContact(const vector<string>& words);
+	void CreateBusinessContact(const vector<string>& words);
 	void CreatePersonContact(const vector<string>& words);
 	Contact* FindInQuickbook(const string& name, const string& contactType);
 	void AddToQuickbook(const string& name, const string& contactType, Contact* contact);
