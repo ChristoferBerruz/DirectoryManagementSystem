@@ -384,7 +384,7 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 	}
 	
 	string res = GenerateTable(queryRes, label1, label2);
-	cout << res;
+
 	return res;
 }
 
