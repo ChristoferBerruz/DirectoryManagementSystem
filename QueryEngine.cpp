@@ -9,6 +9,11 @@
 #include <iomanip>
 #include <algorithm>
 
+/// <summary>
+/// Query I
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> CLIQueryEngine::SearchPersonByNameOrderByState(const vector<Contact*>& contacts)
 {
 	cout << "Please enter name: ";
@@ -38,6 +43,11 @@ map<string, int> CLIQueryEngine::SearchPersonByNameOrderByState(const vector<Con
 	return res;
 }
 
+/// <summary>
+/// Query II
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> CLIQueryEngine::SearchPersonByEmailOrderByGender(const vector<Contact*>& contacts)
 {
 	cout << "Please enter email domain: ";
@@ -73,6 +83,12 @@ map<string, int> CLIQueryEngine::SearchPersonByEmailOrderByGender(const vector<C
 	return res;
 }
 
+
+/// <summary>
+/// Query III
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> CLIQueryEngine::SearchQueryBusinessByPhoneNumberOrderByCategory(const vector<Contact*>& contacts)
 {
 	cout << "Please enter area code: ";
@@ -115,6 +131,11 @@ map<string, int> CLIQueryEngine::SearchQueryBusinessByPhoneNumberOrderByCategory
 	
 }
 
+/// <summary>
+/// Query IV
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> CLIQueryEngine::SearchQueryBusinessByEmailOrWebsiteOrderByCategory(const vector<Contact*>& contacts)
 {
 	cout << "Please enter emailEnding: ";
@@ -182,6 +203,11 @@ map<string, int> CLIQueryEngine::SearchQueryBusinessByEmailOrWebsiteOrderByCateg
 	return res;
 }
 
+/// <summary>
+/// Query V
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> CLIQueryEngine::SearchQueryPeopleLivingInCTWithOutOfStatePhone(const vector<Contact*>& contacts)
 {
 	cout << "Please enter area code: ";
@@ -259,6 +285,13 @@ map<string, int> CLIQueryEngine::SearchQueryPeopleLivingInCTWithOutOfStatePhone(
 	return res;
 }
 
+/// <summary>
+/// Generates a nice table showing the results of a query
+/// </summary>
+/// <param name="queryResult"></param>
+/// <param name="label1"></param>
+/// <param name="label2"></param>
+/// <returns></returns>
 string CLIQueryEngine::GenerateTable(const map<string, int>& queryResult, const string& label1, const string& label2)
 {
 	ostringstream buffer;
@@ -276,7 +309,10 @@ string CLIQueryEngine::GenerateTable(const map<string, int>& queryResult, const 
 	return buffer.str();
 }
 
-
+/// <summary>
+/// Deals with retrieving a valid search query option from CLI
+/// </summary>
+/// <returns></returns>
 int CLIQueryEngine::GetSearchOptionFromCLI()
 {
 	// Buffer the prompt in memory given its size
@@ -306,6 +342,12 @@ int CLIQueryEngine::GetSearchOptionFromCLI()
 
 	return stoi(option);
 }
+
+/// <summary>
+/// Handles selection and execution of a valid SearchQuery registered in the engine
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 {
 	
@@ -352,6 +394,11 @@ string CLIQueryEngine::DisplayQuery(const vector<Contact*>& contacts)
 	return " ";
 }
 
+/// <summary>
+/// Handles and executes the registered Type of Queries
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 string CLIQueryEngine::Query(const vector<Contact*>& contacts)
 {
 	cout << "Available Queries are: (1) SearchQuery or (2) DisplayQuery." << endl;
