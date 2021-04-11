@@ -3,6 +3,7 @@
 #include "PersonEmailContact.h"
 #include "BusinessPhoneContact.h"
 #include "BusinessWebContact.h"
+#include "PersonPhoneContact.h"
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -181,6 +182,83 @@ map<string, int> CLIQueryEngine::SearchQueryBusinessByEmailOrWebsiteOrderByCateg
 	return res;
 }
 
+map<string, int> CLIQueryEngine::SearchQueryPeopleLivingInCTWithOutOfStatePhone(const vector<Contact*>& contacts)
+{
+	cout << "Please enter area code: ";
+
+	string areaCode;
+	cin >> areaCode;
+
+	vector<Contact*>::const_iterator contact;
+
+	vector<PersonAddressContact*> peopleLivingInCt;
+	for_each(contacts.begin(), contacts.end(), [&peopleLivingInCt](Contact* const &contact)
+		{
+			PersonAddressContact* addressContact = dynamic_cast<PersonAddressContact*>(contact);
+			if (addressContact && addressContact->GetAddress().GetState() == "Connecticut")
+				peopleLivingInCt.push_back(addressContact);
+		}
+	);
+
+	map<string, int> res;
+
+	for_each(peopleLivingInCt.begin(), peopleLivingInCt.end(),[&res, &contacts, &areaCode, this](PersonAddressContact* const& addressContact)
+		{
+			string name = addressContact->GetName();
+			string state = addressContact->GetAddress().GetState();
+			for_each(contacts.begin(), contacts.end(), [&res, &areaCode, &name, &state, this](Contact* const& contact) 
+				{
+					PersonPhoneContact* phoneContact = dynamic_cast<PersonPhoneContact*>(contact);
+					if (phoneContact && phoneContact->GetName() == name)
+					{
+						// For U.S. numbers
+						string target = "1-" + areaCode;
+						
+						vector<string> phoneNumbers = phoneContact->GetPhoneNumbers();
+						
+						bool notInState = true;
+						for (auto phone = phoneNumbers.begin(); phone != phoneNumbers.end(); phone++)
+						{
+							// We find the area code, so this is not good
+							if (phone->rfind(target, 0) == 0)
+							{
+								notInState = false;
+							}
+						}
+
+						if (!notInState)
+						{
+							return;
+						}
+
+						// We pick the first phone number not in CT
+						for (auto phone = phoneNumbers.begin(); phone != phoneNumbers.end(); phone++)
+						{
+							// Pick first number not in CT
+							if (phone->rfind(target, 0) != 0)
+							{
+								string phoneAreaCode = (*phone).substr(2, 3);
+								string state = (*this).areaQuickbook.GetState(phoneAreaCode);
+
+								if (res.find(state) == res.end())
+								{
+									res[state] = 0;
+								}
+
+								res[state] += 1;
+								break;
+							}
+						}
+						
+					}
+				}
+			);
+		}
+	);
+
+	return res;
+}
+
 string CLIQueryEngine::GenerateTable(const map<string, int>& queryResult, const string& label1, const string& label2)
 {
 	ostringstream buffer;
@@ -209,6 +287,9 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 	cout << "(4) Find the number of organizations in the directory with a " <<
 		"<emailEnding> email or a <websiteDomain> website ordered by the organization category.\n";
 
+	cout << "(5) Find the number of people in Connecticut whose" 
+		<< " phone numbers  DO NOT BEGIN with <areaCode>.\n";
+
 	cout << "Please enter a valid option: ";
 	string option;
 	cin >> option;
@@ -235,6 +316,11 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 	{
 		queryRes = SearchQueryBusinessByEmailOrWebsiteOrderByCategory(contacts);
 		label1 = "Category";
+	}
+	else if (option == "5")
+	{
+		queryRes = SearchQueryPeopleLivingInCTWithOutOfStatePhone(contacts);
+		label1 = "State";
 	}
 	
 	string res = GenerateTable(queryRes, label1, label2);

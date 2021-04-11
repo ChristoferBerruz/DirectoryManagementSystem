@@ -2,12 +2,14 @@
 #define QUERY_ENGINE_H
 
 #include "Contact.h"
+#include "AreaCodesBook.h"
 #include <map>
 #include <vector>
 using namespace std;
 class CLIQueryEngine
 {
 private:
+	AreaCodesBook areaQuickbook;
 	map<string, int> SearchPersonByNameOrderByState(const vector<Contact*>& contacts);
 	map<string, int> SearchPersonByEmailOrderByGender(const vector<Contact*>& contacts);
 	map<string, int> SearchQueryBusinessByPhoneNumberOrderByCategory(const vector<Contact*>& contacts);
