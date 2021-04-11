@@ -16,6 +16,7 @@ public:
 	PersonPhoneContact(const string& fullName, const string& gender);
 
 	void AddPhoneNumber(const string& phoneNum);
+	vector<string> GetPhoneNumbers() const { return phoneNumbers; }
 	virtual void Display() const;
 	virtual ~PersonPhoneContact() {}
 };
