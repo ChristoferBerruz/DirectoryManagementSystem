@@ -19,6 +19,7 @@ private:
 	string GetPersonInfo(const vector<Contact*>& contacts);
 	string GetBusinessInfo(const vector<Contact*>& contacts);
 	string SearchQuery(const vector<Contact*>& contacts);
+	int GetSearchOptionFromCLI();
 	string DisplayQuery(const vector<Contact*>& contacts);
 public:
 	string Query(const vector<Contact*>& contacts);

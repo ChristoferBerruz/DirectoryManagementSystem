@@ -192,7 +192,7 @@ map<string, int> CLIQueryEngine::SearchQueryPeopleLivingInCTWithOutOfStatePhone(
 	vector<Contact*>::const_iterator contact;
 
 	vector<PersonAddressContact*> peopleLivingInCt;
-	for_each(contacts.begin(), contacts.end(), [&peopleLivingInCt](Contact* const &contact)
+	for_each(contacts.begin(), contacts.end(), [&peopleLivingInCt](Contact* const& contact)
 		{
 			PersonAddressContact* addressContact = dynamic_cast<PersonAddressContact*>(contact);
 			if (addressContact && addressContact->GetAddress().GetState() == "Connecticut")
@@ -202,20 +202,20 @@ map<string, int> CLIQueryEngine::SearchQueryPeopleLivingInCTWithOutOfStatePhone(
 
 	map<string, int> res;
 
-	for_each(peopleLivingInCt.begin(), peopleLivingInCt.end(),[&res, &contacts, &areaCode, this](PersonAddressContact* const& addressContact)
+	for_each(peopleLivingInCt.begin(), peopleLivingInCt.end(), [&res, &contacts, &areaCode, this](PersonAddressContact* const& addressContact)
 		{
 			string name = addressContact->GetName();
 			string state = addressContact->GetAddress().GetState();
-			for_each(contacts.begin(), contacts.end(), [&res, &areaCode, &name, &state, this](Contact* const& contact) 
+			for_each(contacts.begin(), contacts.end(), [&res, &areaCode, &name, &state, this](Contact* const& contact)
 				{
 					PersonPhoneContact* phoneContact = dynamic_cast<PersonPhoneContact*>(contact);
 					if (phoneContact && phoneContact->GetName() == name)
 					{
 						// For U.S. numbers
 						string target = "1-" + areaCode;
-						
+
 						vector<string> phoneNumbers = phoneContact->GetPhoneNumbers();
-						
+
 						bool notInState = true;
 						for (auto phone = phoneNumbers.begin(); phone != phoneNumbers.end(); phone++)
 						{
@@ -249,7 +249,7 @@ map<string, int> CLIQueryEngine::SearchQueryPeopleLivingInCTWithOutOfStatePhone(
 								break;
 							}
 						}
-						
+
 					}
 				}
 			);
@@ -276,51 +276,69 @@ string CLIQueryEngine::GenerateTable(const map<string, int>& queryResult, const 
 	return buffer.str();
 }
 
-string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
+
+int CLIQueryEngine::GetSearchOptionFromCLI()
 {
-	cout << "Available Search queries are:\n";
-	cout << "(1) Find the number of people with <name> ordered by state.\n";
-	cout << "(2) Find the number of people in the directory whose email domain is <domain> ordered by the gender.\n";
-	cout << "(3) Find the number of organizations in the directory whose " <<
+	// Buffer the prompt in memory given its size
+	ostringstream tempOut;
+	tempOut << "Available Search queries are:\n";
+	tempOut << "(1) Find the number of people with <name> ordered by state.\n";
+	tempOut << "(2) Find the number of people in the directory whose email domain is <domain> ordered by the gender.\n";
+	tempOut << "(3) Find the number of organizations in the directory whose " <<
 		"phone number start with the area code <areaCode> ordered by the organization category.\n";
 
-	cout << "(4) Find the number of organizations in the directory with a " <<
+	tempOut << "(4) Find the number of organizations in the directory with a " <<
 		"<emailEnding> email or a <websiteDomain> website ordered by the organization category.\n";
 
-	cout << "(5) Find the number of people in Connecticut whose" 
-		<< " phone numbers  DO NOT BEGIN with <areaCode>.\n";
+	tempOut << "(5) Find the number of people in Connecticut whose"
+		<< " phone numbers DO NOT BEGIN with <areaCode>.\n";
 
+	// Dump prompt;
+	cout << tempOut.str();
 	cout << "Please enter a valid option: ";
 	string option;
-	cin >> option;
+
+	// Handle option to be between valid range
+	string lowerLim("1");
+	string upperLim("5");
+	while (cin >> option && lowerLim > option || option > upperLim)
+		cout << "Please enter a valid option: ";
+
+	return stoi(option);
+}
+string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
+{
+	
+	int optionNum = GetSearchOptionFromCLI();
 
 	map<string, int> queryRes;
 	string label1;
 	string label2 = "Number";
-	if (option == "1")
+
+	switch (optionNum) 
 	{
+	case 1:
 		queryRes = SearchPersonByNameOrderByState(contacts);
 		label1 = "State";
-	}
-	else if (option == "2")
-	{
+		break;
+	case 2:
 		queryRes = SearchPersonByEmailOrderByGender(contacts);
 		label1 = "Gender";
-	}
-	else if (option == "3")
-	{
+		break;
+	case 3:
 		queryRes = SearchQueryBusinessByPhoneNumberOrderByCategory(contacts);
 		label1 = "Category";
-	}
-	else if (option == "4")
-	{
+		break;
+	case 4:
 		queryRes = SearchQueryBusinessByEmailOrWebsiteOrderByCategory(contacts);
 		label1 = "Category";
-	}
-	else if (option == "5")
-	{
+		break;
+	case 5:
 		queryRes = SearchQueryPeopleLivingInCTWithOutOfStatePhone(contacts);
 		label1 = "State";
+		break;
+	default:
+		break;
 	}
 	
 	string res = GenerateTable(queryRes, label1, label2);
