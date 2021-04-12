@@ -10,11 +10,11 @@ class CLIQueryEngine
 {
 private:
 	CoreQueryEngine coreQuery;
-	map<string, int> SearchPersonByNameOrderByState(const vector<Contact*>& contacts);
-	map<string, int> SearchPersonByEmailOrderByGender(const vector<Contact*>& contacts);
-	map<string, int> SearchQueryBusinessByPhoneNumberOrderByCategory(const vector<Contact*>& contacts);
-	map<string, int> SearchQueryBusinessByEmailOrWebsiteOrderByCategory(const vector<Contact*>& contacts);
-	map<string, int> SearchQueryPeopleLivingInCTWithOutOfStatePhone(const vector<Contact*>& contacts);
+	string SearchPersonByNameOrderByState(const vector<Contact*>& contacts);
+	string SearchPersonByEmailOrderByGender(const vector<Contact*>& contacts);
+	string SearchQueryBusinessByPhoneNumberOrderByCategory(const vector<Contact*>& contacts);
+	string SearchQueryBusinessByEmailOrWebsiteOrderByCategory(const vector<Contact*>& contacts);
+	string SearchQueryPeopleLivingInCTWithOutOfStatePhone(const vector<Contact*>& contacts);
 	string GenerateTable(const map<string, int>& queryResult, const string& label1, const string& label2);
 	string GetPersonInfo(const vector<Contact*>& contacts);
 	string GetBusinessInfo(const vector<Contact*>& contacts);

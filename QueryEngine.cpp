@@ -14,14 +14,15 @@
 /// </summary>
 /// <param name="contacts"></param>
 /// <returns></returns>
-map<string, int> CLIQueryEngine::SearchPersonByNameOrderByState(const vector<Contact*>& contacts)
+string CLIQueryEngine::SearchPersonByNameOrderByState(const vector<Contact*>& contacts)
 {
 	cout << "Please enter name: ";
 	string name;
 	cin >> name;
 
 	map<string, int> res = coreQuery.SearchPersonByNameOrderByState(contacts, name);
-	return res;
+	
+	return GenerateTable(res, "Name", "Number");
 }
 
 /// <summary>
@@ -29,14 +30,14 @@ map<string, int> CLIQueryEngine::SearchPersonByNameOrderByState(const vector<Con
 /// </summary>
 /// <param name="contacts"></param>
 /// <returns></returns>
-map<string, int> CLIQueryEngine::SearchPersonByEmailOrderByGender(const vector<Contact*>& contacts)
+string CLIQueryEngine::SearchPersonByEmailOrderByGender(const vector<Contact*>& contacts)
 {
 	cout << "Please enter email domain: ";
 	string emailDomain;
 	cin >> emailDomain;
 
 	map<string, int> res = coreQuery.SearchPersonByEmailOrderByGender(contacts, emailDomain);
-	return res;
+	return GenerateTable(res, "Gender", "Number");
 }
 
 
@@ -45,7 +46,7 @@ map<string, int> CLIQueryEngine::SearchPersonByEmailOrderByGender(const vector<C
 /// </summary>
 /// <param name="contacts"></param>
 /// <returns></returns>
-map<string, int> CLIQueryEngine::SearchQueryBusinessByPhoneNumberOrderByCategory(const vector<Contact*>& contacts)
+string CLIQueryEngine::SearchQueryBusinessByPhoneNumberOrderByCategory(const vector<Contact*>& contacts)
 {
 	cout << "Please enter area code: ";
 
@@ -53,8 +54,7 @@ map<string, int> CLIQueryEngine::SearchQueryBusinessByPhoneNumberOrderByCategory
 	cin >> areaCode;
 
 	map<string, int> res = coreQuery.SearchQueryBusinessByPhoneNumberOrderByCategory(contacts, areaCode);
-	return res;
-	
+	return GenerateTable(res, "Category", "Number");
 }
 
 /// <summary>
@@ -62,7 +62,7 @@ map<string, int> CLIQueryEngine::SearchQueryBusinessByPhoneNumberOrderByCategory
 /// </summary>
 /// <param name="contacts"></param>
 /// <returns></returns>
-map<string, int> CLIQueryEngine::SearchQueryBusinessByEmailOrWebsiteOrderByCategory(const vector<Contact*>& contacts)
+string CLIQueryEngine::SearchQueryBusinessByEmailOrWebsiteOrderByCategory(const vector<Contact*>& contacts)
 {
 	cout << "Please enter emailEnding: ";
 	string emailEnding;
@@ -73,7 +73,7 @@ map<string, int> CLIQueryEngine::SearchQueryBusinessByEmailOrWebsiteOrderByCateg
 	cin >> websiteDomain;
 
 	map<string, int> res = coreQuery.SearchQueryBusinessByEmailOrWebsiteOrderByCategory(contacts, emailEnding, websiteDomain);
-	return res;
+	return GenerateTable(res, "Category", "Number");
 }
 
 /// <summary>
@@ -81,7 +81,7 @@ map<string, int> CLIQueryEngine::SearchQueryBusinessByEmailOrWebsiteOrderByCateg
 /// </summary>
 /// <param name="contacts"></param>
 /// <returns></returns>
-map<string, int> CLIQueryEngine::SearchQueryPeopleLivingInCTWithOutOfStatePhone(const vector<Contact*>& contacts)
+string CLIQueryEngine::SearchQueryPeopleLivingInCTWithOutOfStatePhone(const vector<Contact*>& contacts)
 {
 	cout << "Please enter area code: ";
 
@@ -90,7 +90,7 @@ map<string, int> CLIQueryEngine::SearchQueryPeopleLivingInCTWithOutOfStatePhone(
 
 	map<string, int> res = coreQuery.SearchQueryPeopleLivingInCTWithOutOfStatePhone(contacts, areaCode);
 
-	return res;
+	return GenerateTable(res, "State", "Number");
 }
 
 /// <summary>
@@ -161,37 +161,29 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 	
 	int optionNum = GetSearchOptionFromCLI();
 
-	map<string, int> queryRes;
-	string label1;
-	string label2 = "Number";
+	string res;
 
 	switch (optionNum) 
 	{
 	case 1:
-		queryRes = SearchPersonByNameOrderByState(contacts);
-		label1 = "State";
+		res = SearchPersonByNameOrderByState(contacts);
 		break;
 	case 2:
-		queryRes = SearchPersonByEmailOrderByGender(contacts);
-		label1 = "Gender";
+		res = SearchPersonByEmailOrderByGender(contacts);
 		break;
 	case 3:
-		queryRes = SearchQueryBusinessByPhoneNumberOrderByCategory(contacts);
-		label1 = "Category";
+		res = SearchQueryBusinessByPhoneNumberOrderByCategory(contacts);
 		break;
 	case 4:
-		queryRes = SearchQueryBusinessByEmailOrWebsiteOrderByCategory(contacts);
-		label1 = "Category";
+		res = SearchQueryBusinessByEmailOrWebsiteOrderByCategory(contacts);
 		break;
 	case 5:
-		queryRes = SearchQueryPeopleLivingInCTWithOutOfStatePhone(contacts);
-		label1 = "State";
+		res = SearchQueryPeopleLivingInCTWithOutOfStatePhone(contacts);
 		break;
 	default:
 		break;
 	}
 	
-	string res = GenerateTable(queryRes, label1, label2);
 	cout << res;
 	return res;
 }
