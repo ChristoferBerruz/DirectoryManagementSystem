@@ -284,7 +284,7 @@ void DirectoryManagementSystem::ShowAllContacts()
 
 void DirectoryManagementSystem::Query()
 {
-	engine.Query(contacts);
+	queryResult = engine.Query(contacts);
 }
 
 istream& operator>>(istream& is, DirectoryManagementSystem dms) 
