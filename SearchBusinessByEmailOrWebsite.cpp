@@ -1,5 +1,10 @@
 #include "SearchBusinessByEmailOrWebsite.h"
 
+/// <summary>
+/// Searches a business contact that matches either a email ending or website domain.
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> SearchBusinessByEmailOrWebsite::Search(const vector<Contact*>& contacts)
 {
 	map<string, int> res;

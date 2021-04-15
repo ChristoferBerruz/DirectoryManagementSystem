@@ -6,6 +6,13 @@ string SearchPersonByEmail::Execute(const vector<Contact*>& contacts)
 	return FormatAsTable(res, "Gender", "Number");
 }
 
+
+
+/// <summary>
+/// Searches a directory for people that match a email domain.
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> SearchPersonByEmail::Search(const vector<Contact*>& contacts)
 {
 	map<string, int> res;

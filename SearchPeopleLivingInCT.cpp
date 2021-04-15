@@ -1,6 +1,12 @@
 #include "SearchPeopleLivingInCT.h"
 
 
+/// <summary>
+/// Find the number of people in Connecticut whose phone numbers have out-of-state
+/// area codes aggregated by the state.
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> SearchPeopleLivingInCT::Search(const vector<Contact*>& contacts)
 {
 	vector<Contact*>::const_iterator contact;

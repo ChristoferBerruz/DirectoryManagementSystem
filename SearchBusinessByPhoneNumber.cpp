@@ -1,5 +1,11 @@
 #include "SearchBusinessByPhoneNumber.h"
 
+
+/// <summary>
+/// Finds business that match a phone area code.
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> SearchBusinessByPhoneNumber::Search(const vector<Contact*>& contacts)
 {
 	map<string, int> res;
