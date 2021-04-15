@@ -21,10 +21,10 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\DirectoryManagementSystem.cpp">
+    <ClCompile Include="..\SearchPersonByName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\QueryCoreEngine.cpp">
+    <ClCompile Include="..\SearchQuery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Address.cpp">
@@ -48,6 +48,18 @@
     <ClCompile Include="..\Contact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\DirectoryManagementSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DisplayBusiness.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DisplayPerson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DisplayQuery.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\PersonAddressContact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,7 +72,22 @@
     <ClCompile Include="..\PersonPhoneContact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\QueryCoreEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\QueryEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SearchBusinessByEmailOrWebsite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SearchBusinessByPhoneNumber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SearchPeopleLivingInCT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SearchPersonByEmail.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Validator.cpp">
@@ -71,10 +98,13 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\DirectoryManagementSystem.h">
+    <ClInclude Include="..\SearchPersonByName.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\QueryCoreEngine.h">
+    <ClInclude Include="..\BaseQuery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SearchQuery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Address.h">
@@ -98,7 +128,16 @@
     <ClInclude Include="..\Contact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\PersonAddressContact.h">
+    <ClInclude Include="..\DirectoryManagementSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DisplayBusiness.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DisplayPerson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DisplayQuery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\PersonContact.h">
@@ -113,11 +152,27 @@
     <ClInclude Include="..\QueryEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\SearchBusinessByEmailOrWebsite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SearchBusinessByPhoneNumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SearchPeopleLivingInCT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SearchPersonByEmail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\Validator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="person-test.txt" />
+    <Text Include="..\areacodes.txt" />
+    <Text Include="..\input1.txt" />
+    <Text Include="..\input2.txt" />
+    <Text Include="..\input3.txt" />
+    <Text Include="..\input4.txt" />
   </ItemGroup>
 </Project>

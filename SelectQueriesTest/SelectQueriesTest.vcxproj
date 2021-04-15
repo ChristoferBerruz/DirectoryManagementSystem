@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{8CDCE5DB-D902-429B-B151-0260D1671EA8}</ProjectGuid>
+    <ProjectGuid>{E797CBEC-8490-4CD0-A0C6-47090EE05845}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SelectQueriesTest</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -164,12 +164,21 @@
     <ClCompile Include="..\BusinessWebContact.cpp" />
     <ClCompile Include="..\Contact.cpp" />
     <ClCompile Include="..\DirectoryManagementSystem.cpp" />
+    <ClCompile Include="..\DisplayBusiness.cpp" />
+    <ClCompile Include="..\DisplayPerson.cpp" />
+    <ClCompile Include="..\DisplayQuery.cpp" />
     <ClCompile Include="..\PersonAddressContact.cpp" />
     <ClCompile Include="..\PersonContact.cpp" />
     <ClCompile Include="..\PersonEmailContact.cpp" />
     <ClCompile Include="..\PersonPhoneContact.cpp" />
     <ClCompile Include="..\QueryCoreEngine.cpp" />
     <ClCompile Include="..\QueryEngine.cpp" />
+    <ClCompile Include="..\SearchBusinessByEmailOrWebsite.cpp" />
+    <ClCompile Include="..\SearchBusinessByPhoneNumber.cpp" />
+    <ClCompile Include="..\SearchPeopleLivingInCT.cpp" />
+    <ClCompile Include="..\SearchPersonByEmail.cpp" />
+    <ClCompile Include="..\SearchPersonByName.cpp" />
+    <ClCompile Include="..\SearchQuery.cpp" />
     <ClCompile Include="..\Validator.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -182,18 +191,26 @@
   <ItemGroup>
     <ClInclude Include="..\Address.h" />
     <ClInclude Include="..\AreaCodesBook.h" />
+    <ClInclude Include="..\BaseQuery.h" />
     <ClInclude Include="..\BusinessAddressContact.h" />
     <ClInclude Include="..\BusinessContact.h" />
     <ClInclude Include="..\BusinessPhoneContact.h" />
     <ClInclude Include="..\BusinessWebContact.h" />
     <ClInclude Include="..\Contact.h" />
     <ClInclude Include="..\DirectoryManagementSystem.h" />
-    <ClInclude Include="..\PersonAddressContact.h" />
+    <ClInclude Include="..\DisplayBusiness.h" />
+    <ClInclude Include="..\DisplayPerson.h" />
+    <ClInclude Include="..\DisplayQuery.h" />
     <ClInclude Include="..\PersonContact.h" />
     <ClInclude Include="..\PersonEmailContact.h" />
     <ClInclude Include="..\PersonPhoneContact.h" />
-    <ClInclude Include="..\QueryCoreEngine.h" />
     <ClInclude Include="..\QueryEngine.h" />
+    <ClInclude Include="..\SearchBusinessByEmailOrWebsite.h" />
+    <ClInclude Include="..\SearchBusinessByPhoneNumber.h" />
+    <ClInclude Include="..\SearchPeopleLivingInCT.h" />
+    <ClInclude Include="..\SearchPersonByEmail.h" />
+    <ClInclude Include="..\SearchPersonByName.h" />
+    <ClInclude Include="..\SearchQuery.h" />
     <ClInclude Include="..\Validator.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
@@ -203,7 +220,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="person-test.txt" />
+    <Text Include="..\areacodes.txt" />
+    <Text Include="..\input1.txt" />
+    <Text Include="..\input2.txt" />
+    <Text Include="..\input3.txt" />
+    <Text Include="..\input4.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
