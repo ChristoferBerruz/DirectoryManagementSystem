@@ -141,11 +141,15 @@
   <ItemGroup>
     <ClInclude Include="Address.h" />
     <ClInclude Include="AreaCodesBook.h" />
+    <ClInclude Include="BaseQuery.h" />
     <ClInclude Include="BusinessAddressContact.h" />
     <ClInclude Include="BusinessContact.h" />
     <ClInclude Include="BusinessPhoneContact.h" />
     <ClInclude Include="BusinessWebContact.h" />
     <ClInclude Include="Contact.h" />
+    <ClInclude Include="DisplayBusiness.h" />
+    <ClInclude Include="DisplayPerson.h" />
+    <ClInclude Include="DisplayQuery.h" />
     <ClInclude Include="QueryCoreEngine.h" />
     <ClInclude Include="DirectoryManagementSystem.h" />
     <ClInclude Include="PersonAddressContact.h" />
@@ -153,6 +157,12 @@
     <ClInclude Include="PersonEmailContact.h" />
     <ClInclude Include="PersonPhoneContact.h" />
     <ClInclude Include="QueryEngine.h" />
+    <ClInclude Include="SearchBusinessByEmailOrWebsite.h" />
+    <ClInclude Include="SearchBusinessByPhoneNumber.h" />
+    <ClInclude Include="SearchPeopleLivingInCT.h" />
+    <ClInclude Include="SearchPersonByEmail.h" />
+    <ClInclude Include="SearchPersonByName.h" />
+    <ClInclude Include="SearchQuery.h" />
     <ClInclude Include="Validator.h" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +174,9 @@
     <ClCompile Include="BusinessWebContact.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="DirectoryManagementSystem.cpp" />
+    <ClCompile Include="DisplayBusiness.cpp" />
+    <ClCompile Include="DisplayPerson.cpp" />
+    <ClCompile Include="DisplayQuery.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PersonAddressContact.cpp" />
     <ClCompile Include="PersonContact.cpp" />
@@ -171,6 +184,12 @@
     <ClCompile Include="PersonPhoneContact.cpp" />
     <ClCompile Include="QueryCoreEngine.cpp" />
     <ClCompile Include="QueryEngine.cpp" />
+    <ClCompile Include="SearchBusinessByEmailOrWebsite.cpp" />
+    <ClCompile Include="SearchBusinessByPhoneNumber.cpp" />
+    <ClCompile Include="SearchPeopleLivingInCT.cpp" />
+    <ClCompile Include="SearchPersonByEmail.cpp" />
+    <ClCompile Include="SearchPersonByName.cpp" />
+    <ClCompile Include="SearchQuery.cpp" />
     <ClCompile Include="Validator.cpp" />
   </ItemGroup>
   <ItemGroup>

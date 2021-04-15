@@ -13,33 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Contacts">
+      <UniqueIdentifier>{d2412612-20e2-46c1-9a10-1df2e08569b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Contacts">
+      <UniqueIdentifier>{ec80d873-9d4c-466c-bc45-104fa2711286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Queries">
+      <UniqueIdentifier>{7ae3f95a-87eb-4cd9-9daa-55b3b99b59b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Queries">
+      <UniqueIdentifier>{b1e10524-2688-4f49-94aa-e57a1ea9e35d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Queries\SearchQueries">
+      <UniqueIdentifier>{21f2ec0e-f5bb-4dd1-ab0a-1325791d37bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Queries\SearchQueries">
+      <UniqueIdentifier>{14a758cf-e7ea-485d-963a-12059db23be5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Queries\DisplayQueries">
+      <UniqueIdentifier>{9ea85240-fcc9-4abd-98b5-d6f100ca5d40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Queries\DisplayQueries">
+      <UniqueIdentifier>{d9e6f705-ac08-4b53-a6d8-aa314b096dd1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contact.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BusinessContact.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PersonContact.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BusinessAddressContact.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BusinessPhoneContact.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BusinessWebContact.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PersonAddressContact.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PersonPhoneContact.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PersonEmailContact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Address.h">
@@ -60,36 +60,63 @@
     <ClInclude Include="QueryCoreEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BusinessAddressContact.h">
+      <Filter>Header Files\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="BusinessContact.h">
+      <Filter>Header Files\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="BusinessPhoneContact.h">
+      <Filter>Header Files\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="BusinessWebContact.h">
+      <Filter>Header Files\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonAddressContact.h">
+      <Filter>Header Files\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonContact.h">
+      <Filter>Header Files\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonEmailContact.h">
+      <Filter>Header Files\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonPhoneContact.h">
+      <Filter>Header Files\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseQuery.h">
+      <Filter>Header Files\Queries</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchQuery.h">
+      <Filter>Header Files\Queries</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchBusinessByEmailOrWebsite.h">
+      <Filter>Header Files\Queries\SearchQueries</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchBusinessByPhoneNumber.h">
+      <Filter>Header Files\Queries\SearchQueries</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchPersonByEmail.h">
+      <Filter>Header Files\Queries\SearchQueries</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchPersonByName.h">
+      <Filter>Header Files\Queries\SearchQueries</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayQuery.h">
+      <Filter>Header Files\Queries</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchPeopleLivingInCT.h">
+      <Filter>Header Files\Queries\SearchQueries</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayBusiness.h">
+      <Filter>Header Files\Queries\DisplayQueries</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayPerson.h">
+      <Filter>Header Files\Queries\DisplayQueries</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BusinessContact.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Contact.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PersonContact.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BusinessAddressContact.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BusinessPhoneContact.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BusinessWebContact.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PersonAddressContact.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PersonPhoneContact.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PersonEmailContact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Address.cpp">
@@ -109,6 +136,60 @@
     </ClCompile>
     <ClCompile Include="QueryCoreEngine.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BusinessAddressContact.cpp">
+      <Filter>Source Files\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="BusinessContact.cpp">
+      <Filter>Source Files\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="BusinessPhoneContact.cpp">
+      <Filter>Source Files\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="BusinessWebContact.cpp">
+      <Filter>Source Files\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="Contact.cpp">
+      <Filter>Source Files\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonAddressContact.cpp">
+      <Filter>Source Files\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonContact.cpp">
+      <Filter>Source Files\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonPhoneContact.cpp">
+      <Filter>Source Files\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonEmailContact.cpp">
+      <Filter>Source Files\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchQuery.cpp">
+      <Filter>Source Files\Queries</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchPersonByEmail.cpp">
+      <Filter>Source Files\Queries\SearchQueries</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchBusinessByEmailOrWebsite.cpp">
+      <Filter>Source Files\Queries\SearchQueries</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchBusinessByPhoneNumber.cpp">
+      <Filter>Source Files\Queries\SearchQueries</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchPersonByName.cpp">
+      <Filter>Source Files\Queries\SearchQueries</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchPeopleLivingInCT.cpp">
+      <Filter>Source Files\Queries\SearchQueries</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayQuery.cpp">
+      <Filter>Source Files\Queries</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayBusiness.cpp">
+      <Filter>Source Files\Queries\DisplayQueries</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayPerson.cpp">
+      <Filter>Source Files\Queries\DisplayQueries</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
