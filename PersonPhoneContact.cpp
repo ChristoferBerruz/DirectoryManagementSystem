@@ -1,6 +1,7 @@
 #include "PersonPhoneContact.h"
 #include <iostream>
 #include <algorithm>
+#include <sstream>
 using namespace std;
 PersonPhoneContact::PersonPhoneContact(const string& fullName, const string& gender) :PersonContact(fullName, gender)
 {
@@ -28,4 +29,16 @@ void PersonPhoneContact::Display() const
 		}
 	);
 	cout << endl;
+}
+
+string PersonPhoneContact::PresentPhoneNumbers() const
+{
+	ostringstream buffer;
+	for (int i = 0; i < phoneNumbers.size(); i++)
+	{
+		buffer << phoneNumbers[i];
+		if (i != phoneNumbers.size() - 1)
+			buffer << ", ";
+	}
+	return buffer.str();
 }

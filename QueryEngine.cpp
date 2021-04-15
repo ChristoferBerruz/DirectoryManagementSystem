@@ -3,6 +3,7 @@
 #include "PersonEmailContact.h"
 #include "BusinessPhoneContact.h"
 #include "BusinessWebContact.h"
+#include "BusinessAddressContact.h"
 #include "PersonPhoneContact.h"
 #include <iostream>
 #include <sstream>
@@ -191,7 +192,169 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 
 string CLIQueryEngine::DisplayQuery(const vector<Contact*>& contacts)
 {
-	return " ";
+	cout << "Available Display Queries are:\n";
+	cout << "(1) Display all the details of an organization - <organization>\n";
+	cout << "(2) Display all the details of a person - <name>\n";
+
+	cout << "Please enter a valid option for Display Query: ";
+	string option;
+	while (cin >> option && (option != "1" && option != "2"))
+		cout << "Please enter a valid option for Display Query: ";
+
+	string res;
+	if (option == "1")
+	{
+		res =  GetBusinessInfo(contacts);
+	}
+	else
+	{
+		res =  GetPersonInfo(contacts);
+	}
+
+	cout << res;
+	return res;
+}
+
+
+string CLIQueryEngine::FormatVector(const vector<string>& elements)
+{
+	ostringstream buffer;
+	for (int i = 0; i < elements.size(); i++)
+	{
+		buffer << elements[i];
+		if (i != elements.size() - 1)
+			buffer << ", ";
+	}
+
+	return buffer.str();
+}
+
+
+string CLIQueryEngine::GetBusinessInfo(const vector<Contact*>& contacts)
+{
+	cout << "Enter name of organization: ";
+	
+	string organization;
+	cin >> organization;
+
+	vector<Contact*> businessContacts;
+	copy_if(contacts.begin(), contacts.end(), back_insert_iterator<vector<Contact*>>(businessContacts), [&organization](Contact* const contact)
+		{
+			return dynamic_cast<BusinessContact*>(contact) && contact->GetName() == organization;
+		}
+	);
+
+
+	// We are going to dump the information using this
+	ostringstream buffer;
+
+	// All possible combinations
+	string webBusiness = typeid(BusinessWebContact).name();
+	string phoneBusiness = typeid(BusinessPhoneContact).name();
+	string addressBusiness = typeid(BusinessAddressContact).name();
+	for (int i = 0; i < businessContacts.size(); i++)
+	{
+		Contact* contact = businessContacts[i];
+		if (i == 0)
+		{
+			BusinessContact* business = dynamic_cast<BusinessContact*>(contact);
+			buffer << "Organization: " << business->GetName();
+			buffer << "Category: " << business->GetCategory();
+		}
+
+		string className = typeid(*contact).name();
+		if (className == webBusiness)
+		{
+			BusinessWebContact* webContact = dynamic_cast<BusinessWebContact*>(contact);
+			buffer << "Web addresses: ";
+			
+			vector<string> websites = webContact->GetWebAddresses();
+			buffer << FormatVector(websites) << endl;
+
+			buffer << "Email addresses: ";
+			vector<string> emails = webContact->GetEmailAddresses();
+			buffer << FormatVector(emails) << endl;
+		}
+
+		if (className == phoneBusiness)
+		{
+			BusinessPhoneContact* phoneContact = dynamic_cast<BusinessPhoneContact*>(contact);
+			buffer << "Phone numbers: ";
+			buffer << FormatVector(phoneContact->GetPhoneNumbers()) << endl;
+		}
+
+		if (className == addressBusiness)
+		{
+			BusinessAddressContact* addressContact = dynamic_cast<BusinessAddressContact*>(contact);
+			buffer << "Address: \n";
+			Address address = addressContact->GetAddress();
+			buffer << "Street: " << address.GetStreet();
+			buffer << "City: " << address.GetCity();
+			buffer << "State: " << address.GetState();
+			buffer << "Zip: " << address.GetZipcode();
+		}
+	}
+	return buffer.str();
+}
+
+
+string CLIQueryEngine::GetPersonInfo(const vector<Contact*>& contacts)
+{
+	string dummy;
+	getline(cin, dummy);
+	cout << "Enter name of person: ";
+	string name;
+	getline(cin, name);
+	vector<Contact*> personContacts;
+	copy_if(contacts.begin(), contacts.end(), back_insert_iterator<vector<Contact*>>(personContacts), [&name](Contact* const contact) 
+		{
+			return dynamic_cast<PersonContact*>(contact) && contact->GetName() == name;
+		}
+	);
+
+	// All possible combinatons
+	string addressPerson = typeid(PersonAddressContact).name();
+	string phonePerson = typeid(PersonPhoneContact).name();
+	string emailPerson = typeid(PersonEmailContact).name();
+
+	// We output here
+	ostringstream buffer;
+	for (int i = 0; i < personContacts.size(); i++)
+	{
+		Contact* contact = personContacts[i];
+		if (i == 0) 
+		{
+			PersonContact* person = dynamic_cast<PersonContact*>(contact);
+			buffer << "Name: " << person->GetName() << endl;
+			buffer << "Gender: " << person->GetGender() << endl;
+		}
+
+		string className = typeid(*contact).name();
+
+		if (className == emailPerson)
+		{
+			PersonEmailContact* emailContact = dynamic_cast<PersonEmailContact*>(contact);
+			buffer << "Email: " << FormatVector(emailContact->GetEmails()) << endl;
+		}
+
+		if (className == phonePerson)
+		{
+			PersonPhoneContact* phoneContact = dynamic_cast<PersonPhoneContact*>(contact);
+			buffer << "Phone numbers: " << FormatVector(phoneContact->GetPhoneNumbers()) << endl;
+		}
+		if (className == addressPerson)
+		{
+			PersonAddressContact* addressContact = dynamic_cast<PersonAddressContact*>(contact);
+			buffer << "Address: \n";
+			Address address = addressContact->GetAddress();
+			buffer << "Street: " << address.GetStreet() << endl;
+			buffer << "City: " << address.GetCity() << endl;
+			buffer << "State: " << address.GetState() << endl;
+			buffer << "Zip: " << address.GetZipcode() << endl;
+		}
+	}
+
+	return buffer.str();
 }
 
 /// <summary>

@@ -30,6 +30,7 @@ public:
 	~DirectoryManagementSystem();
 	void IngestData(istream& is);
 	void ShowAllContacts();
+	string TestABC() { return "abc"; }
 	vector<Contact*>& GetContacts() { return contacts; }
 	friend istream& operator>>(istream& is, DirectoryManagementSystem dms);
 };

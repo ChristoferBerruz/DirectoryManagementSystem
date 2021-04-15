@@ -15,6 +15,8 @@ public:
 	PersonEmailContact(const string& fullName, const string& gender, const string& email);
 	PersonEmailContact(const string& fullName, const string& gender);
 
+	string PresentEmails() const;
+
 	void AddEmail(const string& email);
 
 	virtual void Display() const;

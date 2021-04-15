@@ -1,6 +1,7 @@
 #include "PersonEmailContact.h"
 #include <iostream>
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
 PersonEmailContact::PersonEmailContact(const string& fullName, const string& gender, const string& email) 
@@ -33,4 +34,16 @@ void PersonEmailContact::Display() const
 	);
 
 	cout << endl;
+}
+
+string PersonEmailContact::PresentEmails() const
+{
+	ostringstream buffer;
+	for (int i = 0; i < emailAddresses.size(); i++)
+	{
+		buffer << emailAddresses[i];
+		if (i != emailAddresses.size() - 1)
+			buffer << ", ";
+	}
+	return buffer.str();
 }

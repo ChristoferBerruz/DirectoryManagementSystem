@@ -16,6 +16,7 @@ public:
 		const Address& address
 	);
 
+	Address GetAddress() { return address; }
 	virtual void Display() const;
 
 	virtual ~BusinessAddressContact() {}
