@@ -4,6 +4,17 @@
 #include "Contact.h"
 #include "Validator.h"
 #include "QueryEngine.h"
+#include "Contact.h"
+#include "Address.h"
+#include "PersonAddressContact.h"
+#include "PersonEmailContact.h"
+#include "PersonPhoneContact.h"
+#include "BusinessWebContact.h"
+#include "BusinessAddressContact.h"
+#include "BusinessPhoneContact.h"
+#include <sstream>
+#include <algorithm>
+#include <exception>
 #include <map>
 #include <typeinfo>
 #include <vector>

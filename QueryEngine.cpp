@@ -1,16 +1,4 @@
 #include "QueryEngine.h"
-#include "PersonAddressContact.h"
-#include "PersonEmailContact.h"
-#include "BusinessPhoneContact.h"
-#include "BusinessWebContact.h"
-#include "BusinessAddressContact.h"
-#include "PersonPhoneContact.h"
-#include <iostream>
-#include <sstream>
-#include <iomanip>
-#include <algorithm>
-
-#include "BaseQuery.h"
 #include "SearchBusinessByEmailOrWebsite.h"
 #include "SearchBusinessByPhoneNumber.h"
 #include "SearchPeopleLivingInCT.h"
