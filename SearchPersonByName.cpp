@@ -1,8 +1,9 @@
 #include "SearchPersonByName.h"
+
 string SearchPersonByName::Execute(const vector<Contact*>& contacts)
 {
 	map<string, int> res = Search(contacts);
-	return SearchQuery::FormatAsTable(res, "Name", "Number");
+	return SearchQuery::FormatAsTable(res, "State", "Number");
 }
 
 void SearchPersonByName::GetParametersFromCLI()
@@ -13,6 +14,13 @@ void SearchPersonByName::GetParametersFromCLI()
 	SetNameParam(nameParam);
 }
 
+
+/// <summary>
+/// Searches in a directory of contacts the person contacts that match part of a name.
+/// It returns the resuls aggregated by State
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 map<string, int> SearchPersonByName::Search(const vector<Contact*>& contacts)
 {
 	map<string, int> res;
