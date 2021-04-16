@@ -8,6 +8,7 @@ class SearchPersonByEmail : public SearchQuery
 private:
 	string emailDomain;
 public:
+	SearchPersonByEmail(const string& email = ""):emailDomain(email){}
 	string virtual Execute(const vector<Contact*>& contacts);
 	void virtual GetParametersFromCLI();
 	map<string, int> virtual Search(const vector<Contact*>& contacts);

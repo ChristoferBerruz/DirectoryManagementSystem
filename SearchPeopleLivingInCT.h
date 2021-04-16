@@ -10,6 +10,7 @@ private:
 	string areaCode;
 	AreaCodesBook areaQuickbook;
 public:
+	SearchPeopleLivingInCT(const string& areaCode = "") :areaCode(areaCode) {}
 	string virtual Execute(const vector<Contact*>& contacts);
 	void virtual GetParametersFromCLI();
 	map<string, int> virtual Search(const vector<Contact*>& contacts);
