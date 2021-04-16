@@ -23,9 +23,19 @@ DirectoryManagementSystem::~DirectoryManagementSystem()
 void DirectoryManagementSystem::CreatePersonContact(const vector<string>& words)
 {
 	vector<string>::const_iterator word;
-	string name = words[0];
-	string gender = words[1];
-	for (int i = 2; i < words.size(); i++)
+	int i = 0;
+	string name = words[i++];
+	string gender;
+	if (validator.IsGender(words[i]))
+	{
+		gender = words[i++];
+	}
+	else 
+	{
+		gender = "None";
+	}
+
+	for (;i < words.size(); i++)
 	{
 		string current = words[i];
 

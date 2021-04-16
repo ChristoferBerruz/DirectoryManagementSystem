@@ -19,3 +19,8 @@ bool Validator::IsEmail(const string& word)
 {
 	return word.find('@') != string::npos;
 }
+
+bool Validator::IsGender(const string& word)
+{
+	return word == "Female" || word == "Male";
+}
