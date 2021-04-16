@@ -1,4 +1,12 @@
 #include "SearchQuery.h"
+
+/// <summary>
+/// Children can use this function to format their results
+/// </summary>
+/// <param name="queryResult"></param>
+/// <param name="columnOne"></param>
+/// <param name="columnTwo"></param>
+/// <returns></returns>
 string SearchQuery::FormatAsTable(const map<string, int>& queryResult, const string& columnOne, const string& columnTwo)
 {
 	ostringstream buffer;

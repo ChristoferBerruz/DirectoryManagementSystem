@@ -9,7 +9,7 @@ string SearchPersonByEmail::Execute(const vector<Contact*>& contacts)
 
 
 /// <summary>
-/// Searches a directory for people that match a email domain.
+/// Searches a directory for people that match a email domain. Gets results aggregated by gender.
 /// </summary>
 /// <param name="contacts"></param>
 /// <returns></returns>
@@ -26,6 +26,7 @@ map<string, int> SearchPersonByEmail::Search(const vector<Contact*>& contacts)
 				vector<string> emails = emailContact->GetEmails();
 				vector<string>::iterator currentEmail;
 
+				// Check if any of the emails has the email domain
 				for (currentEmail = emails.begin(); currentEmail != emails.end(); currentEmail++)
 				{
 					if (currentEmail->find(emailDomain) != string::npos)
@@ -34,6 +35,7 @@ map<string, int> SearchPersonByEmail::Search(const vector<Contact*>& contacts)
 							res[emailContact->GetGender()] = 0;
 
 						res[emailContact->GetGender()] += 1;
+						// Only add this contact ONCE, so break.
 						break;
 					}
 				}

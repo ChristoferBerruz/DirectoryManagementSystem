@@ -13,6 +13,8 @@ map<string, int> SearchPeopleLivingInCT::Search(const vector<Contact*>& contacts
 	string areaCode = (*this).areaCode;
 
 	vector<PersonAddressContact*> peopleLivingInCt;
+
+	// Get people living in CT
 	for_each(contacts.begin(), contacts.end(), [&peopleLivingInCt](Contact* const& contact)
 		{
 			PersonAddressContact* addressContact = dynamic_cast<PersonAddressContact*>(contact);
@@ -23,6 +25,8 @@ map<string, int> SearchPeopleLivingInCT::Search(const vector<Contact*>& contacts
 
 	map<string, int> res;
 
+
+	// Among people in CT, find people who DO NOT have the requested area code.
 	for_each(peopleLivingInCt.begin(), peopleLivingInCt.end(), [&res, &contacts, &areaCode, this](PersonAddressContact* const& addressContact)
 		{
 			string name = addressContact->GetName();
@@ -52,12 +56,15 @@ map<string, int> SearchPeopleLivingInCT::Search(const vector<Contact*>& contacts
 							return;
 						}
 
+						// This contact does not have the area code.
 						// We pick the first phone number not in CT
 						for (auto phone = phoneNumbers.begin(); phone != phoneNumbers.end(); phone++)
 						{
 							// Pick first number not in CT
 							if (phone->rfind(target, 0) != 0)
 							{
+
+								// Get the state where that area code belongs to
 								string phoneAreaCode = (*phone).substr(2, 3);
 								string state = (*this).areaQuickbook.GetState(phoneAreaCode);
 

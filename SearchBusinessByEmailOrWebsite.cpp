@@ -2,6 +2,7 @@
 
 /// <summary>
 /// Searches a business contact that matches either a email ending or website domain.
+/// Returns results aggregated by Category
 /// </summary>
 /// <param name="contacts"></param>
 /// <returns></returns>

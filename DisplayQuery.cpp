@@ -20,6 +20,7 @@ string DisplayQuery::FormatSimpleLine(const string& label, const string& content
 	buffer << setw(cellLen) << left << label << setw(cellLen) << left << content << endl;
 	return buffer.str();
 }
+
 string DisplayQuery::FormatPaddedLine(const string& label, const string& content)
 {
 	ostringstream buffer;

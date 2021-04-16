@@ -155,6 +155,12 @@ void DirectoryManagementSystem::CreateBusinessContact(const vector<string>& word
 	}
 }
 
+/// <summary>
+/// Allows to find previous entered contacts
+/// </summary>
+/// <param name="name">name of the contact</param>
+/// <param name="contactType">type of the contact</param>
+/// <returns></returns>
 Contact* DirectoryManagementSystem::FindInQuickbook(const string& name, const string& contactType)
 {
 	string key = name + contactType;
@@ -165,6 +171,13 @@ Contact* DirectoryManagementSystem::FindInQuickbook(const string& name, const st
 	return NULL;
 }
 
+
+/// <summary>
+/// Adds a contact to the quickbook.
+/// </summary>
+/// <param name="name"></param>
+/// <param name="contactType"></param>
+/// <param name="contact"></param>
 void DirectoryManagementSystem::AddToQuickbook(const string& name, const string& contactType, Contact* contact)
 {
 	string key = name + contactType;
@@ -242,6 +255,11 @@ vector<string> DirectoryManagementSystem::ParseLine(const string& line)
 	return words;
 }
 
+
+/// <summary>
+/// Gets data to create contacts per file. Only one contact type per file.
+/// </summary>
+/// <param name="is"></param>
 void DirectoryManagementSystem::IngestData(istream& is)
 {
 	string line;
@@ -289,6 +307,10 @@ void DirectoryManagementSystem::IngestData(istream& is)
 	// Parse line by line
 }
 
+
+/// <summary>
+/// Debug function to check that all contacts were added correctly into the DMS
+/// </summary>
 void DirectoryManagementSystem::ShowAllContacts()
 {
 	for_each(contacts.begin(), contacts.end(), [](const Contact* contact)
@@ -299,16 +321,31 @@ void DirectoryManagementSystem::ShowAllContacts()
 	);
 }
 
+
+/// <summary>
+/// Main interface that allows the DMS to be querable.
+/// </summary>
 void DirectoryManagementSystem::Query()
 {
 	queryResult = engine.Query(contacts);
 }
 
+
+/// <summary>
+/// Prints the result of a previously executed query.
+/// </summary>
 void DirectoryManagementSystem::DisplayResult()
 {
 	cout << queryResult << endl;
 }
 
+
+/// <summary>
+/// Another way to ingest data.
+/// </summary>
+/// <param name="is"></param>
+/// <param name="dms"></param>
+/// <returns></returns>
 istream& operator>>(istream& is, DirectoryManagementSystem dms) 
 {
 	try 

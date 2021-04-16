@@ -1,5 +1,11 @@
 #include "DisplayPerson.h"
 
+
+/// <summary>
+/// Finds all the information about a person contact give its name.
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 string DisplayPerson::FindContact(const vector<Contact*>& contacts)
 {
 	string name = (*this).personName;

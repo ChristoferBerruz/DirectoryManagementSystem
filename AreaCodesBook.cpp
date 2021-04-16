@@ -39,6 +39,12 @@ string AreaCodesBook::GetState(const string& areaCode) const
 	return "";
 }
 
+/// <summary>
+/// Finds whether an area code is in the state
+/// </summary>
+/// <param name="areaCode"></param>
+/// <param name="state"></param>
+/// <returns></returns>
 bool AreaCodesBook::IsAreaCodeInState(const string& areaCode, const string& state)
 {
 	if (statesToAreaCodes.find(state) != statesToAreaCodes.end())

@@ -57,9 +57,6 @@
     <ClInclude Include="AreaCodesBook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QueryCoreEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BusinessAddressContact.h">
       <Filter>Header Files\Contacts</Filter>
     </ClInclude>
@@ -132,9 +129,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AreaCodesBook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QueryCoreEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BusinessAddressContact.cpp">

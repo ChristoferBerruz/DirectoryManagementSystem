@@ -150,7 +150,6 @@
     <ClInclude Include="DisplayBusiness.h" />
     <ClInclude Include="DisplayPerson.h" />
     <ClInclude Include="DisplayQuery.h" />
-    <ClInclude Include="QueryCoreEngine.h" />
     <ClInclude Include="DirectoryManagementSystem.h" />
     <ClInclude Include="PersonAddressContact.h" />
     <ClInclude Include="PersonContact.h" />
@@ -182,7 +181,6 @@
     <ClCompile Include="PersonContact.cpp" />
     <ClCompile Include="PersonEmailContact.cpp" />
     <ClCompile Include="PersonPhoneContact.cpp" />
-    <ClCompile Include="QueryCoreEngine.cpp" />
     <ClCompile Include="QueryEngine.cpp" />
     <ClCompile Include="SearchBusinessByEmailOrWebsite.cpp" />
     <ClCompile Include="SearchBusinessByPhoneNumber.cpp" />

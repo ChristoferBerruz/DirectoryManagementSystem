@@ -1,5 +1,10 @@
 #include "DisplayBusiness.h"
 
+/// <summary>
+/// Finds a business contact given an organization name
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 string DisplayBusiness::FindContact(const vector<Contact*>& contacts)
 {
 	string organization = (*this).businessName;

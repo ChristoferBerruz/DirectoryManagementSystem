@@ -2,7 +2,7 @@
 
 
 /// <summary>
-/// Finds business that match a phone area code.
+/// Finds business that match a phone area code. Returns results aggregated by category
 /// </summary>
 /// <param name="contacts"></param>
 /// <returns></returns>
