@@ -11,7 +11,7 @@ private:
 	unordered_map<string, string> areaCodesToStates;
 	unordered_map<string, vector<string>> statesToAreaCodes;
 public:
-	AreaCodesBook();
+	AreaCodesBook(const string& infoFile = "areacodes.txt");
 	string GetState(const string& areaCode) const;
 	bool IsAreaCodeInState(const string& areaCode, const string& state);
 };

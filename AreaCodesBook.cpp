@@ -5,9 +5,9 @@ using namespace std;
 /// <summary>
 /// Reads from a hardcoded file that states and their respective zipcodes
 /// </summary>
-AreaCodesBook::AreaCodesBook()
+AreaCodesBook::AreaCodesBook(const string& infoFile)
 {
-	ifstream inputFile("areacodes.txt");
+	ifstream inputFile(infoFile);
 	while(!inputFile.eof())
 	{
 		string areaCode;
