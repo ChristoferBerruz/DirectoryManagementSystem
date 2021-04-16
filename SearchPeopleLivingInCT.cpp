@@ -99,5 +99,7 @@ void SearchPeopleLivingInCT::GetParametersFromCLI()
 string SearchPeopleLivingInCT::Execute(const vector<Contact*>& contacts)
 {
 	map<string, int> queryRes = Search(contacts);
+	if (queryRes.empty())
+		return "NO RESULTS";
 	return FormatAsTable(queryRes, "State", "Number");
 }

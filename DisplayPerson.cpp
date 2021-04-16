@@ -17,6 +17,9 @@ string DisplayPerson::FindContact(const vector<Contact*>& contacts)
 		}
 	);
 
+	if (personContacts.size() == 0)
+		return "NO RESULTS";
+
 	// All possible combinatons
 	string addressPerson = typeid(PersonAddressContact).name();
 	string phonePerson = typeid(PersonPhoneContact).name();

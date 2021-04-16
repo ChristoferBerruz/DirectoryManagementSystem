@@ -53,5 +53,7 @@ void SearchBusinessByPhoneNumber::GetParametersFromCLI()
 string SearchBusinessByPhoneNumber::Execute(const vector<Contact*>& contacts)
 {
 	map<string, int> res = Search(contacts);
+	if (res.empty())
+		return "NO RESULTS";
 	return FormatAsTable(res, "Category", "Number");
 }

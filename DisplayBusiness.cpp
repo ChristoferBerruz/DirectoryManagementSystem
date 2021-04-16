@@ -16,6 +16,8 @@ string DisplayBusiness::FindContact(const vector<Contact*>& contacts)
 		}
 	);
 
+	if(businessContacts.size() == 0)
+		return "NO RESULTS";
 
 	// We are going to dump the information using this
 	ostringstream buffer;
