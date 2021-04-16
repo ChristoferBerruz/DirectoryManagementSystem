@@ -11,6 +11,7 @@ private:
 	AreaCodesBook areaQuickbook;
 public:
 	SearchPeopleLivingInCT(const string& areaCode = "") :areaCode(areaCode) {}
+	SearchPeopleLivingInCT(const AreaCodesBook& codeBook, const string& areaCode = "") :areaCode(areaCode), areaQuickbook(codeBook) {}
 	string virtual Execute(const vector<Contact*>& contacts);
 	void virtual GetParametersFromCLI();
 	map<string, int> virtual Search(const vector<Contact*>& contacts);
