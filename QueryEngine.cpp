@@ -81,7 +81,6 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 	res = query->Execute(contacts);
 
 	delete query;
-	cout << res;
 	return res;
 }
 
@@ -111,7 +110,6 @@ string CLIQueryEngine::DisplayQuery(const vector<Contact*>& contacts)
 
 	query->GetParametersFromCLI();
 	res = query->Execute(contacts);
-	cout << res;
 	delete query;
 	return res;
 }
