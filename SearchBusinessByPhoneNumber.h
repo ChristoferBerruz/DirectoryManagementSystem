@@ -7,7 +7,7 @@ class SearchBusinessByPhoneNumber : public SearchQuery
 private:
 	string areaCode;
 public:
-	SearchBusinessByPhoneNumber(const string& areaCode) :areaCode(areaCode) {}
+	SearchBusinessByPhoneNumber(const string& areaCode="") :areaCode(areaCode) {}
 	string virtual Execute(const vector<Contact*>& contacts);
 	void virtual GetParametersFromCLI();
 	map<string, int> virtual Search(const vector<Contact*>& contacts);
