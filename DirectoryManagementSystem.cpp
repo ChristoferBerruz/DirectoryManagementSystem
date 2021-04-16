@@ -90,9 +90,22 @@ void DirectoryManagementSystem::CreatePersonContact(const vector<string>& words)
 /// <param name="words"></param>
 void DirectoryManagementSystem::CreateBusinessContact(const vector<string>& words)
 {
-	string name = words[0];
-	string category = words[1];
-	for (int i = 2; i < words.size(); i++)
+	int i = 0;
+	string name = words[i++];
+	string category = words[i];
+	bool isPhone = validator.IsPhoneNumber(category);
+	bool isEmail = validator.IsEmail(category);
+	bool isWebsite = validator.IsWebsite(category);
+	if (isPhone || isEmail || isWebsite)
+	{
+		// Misplace as category, we need to read from here onwards
+		category = "None";
+	}
+	else {
+		// It is indeed a category, so update index
+		i++;
+	}
+	for (; i < words.size(); i++)
 	{
 		string current = words[i];
 		if (validator.IsEmail(current) || validator.IsWebsite(current))
