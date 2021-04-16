@@ -10,9 +10,8 @@ bool Validator::IsPhoneNumber(const string& word)
 
 bool Validator::IsWebsite(const string& word)
 {
-	regex websitePattern("w{3}\.[a-zA-Z]+\.[a-zA-Z]+");
 
-	return regex_match(word, websitePattern);
+	return word.rfind("www", 0) ==  0;
 }
 
 bool Validator::IsEmail(const string& word)
