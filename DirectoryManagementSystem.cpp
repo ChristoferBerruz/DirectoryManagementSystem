@@ -340,6 +340,12 @@ void DirectoryManagementSystem::DisplayResult()
 }
 
 
+ostream& operator<<(ostream& os, DirectoryManagementSystem dms)
+{
+	os << dms.queryResult << endl;
+	return os;
+}
+
 /// <summary>
 /// Another way to ingest data.
 /// </summary>
