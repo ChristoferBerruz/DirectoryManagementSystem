@@ -266,20 +266,27 @@ void DirectoryManagementSystem::IngestData(istream& is)
 	if (contactType != "person" && contactType != "business")
 		throw exception("Contact type not supported.");
 
-	// Parse line by line
-	while (!is.eof())
+	try 
 	{
-		getline(is, line);
-
-		words = ParseLine(line);
-		if (contactType == "person") {
-			CreatePersonContact(words);
-		}
-		else if (contactType == "business")
+		while (!is.eof())
 		{
-			CreateBusinessContact(words);
+			getline(is, line);
+
+			words = ParseLine(line);
+			if (contactType == "person") {
+				CreatePersonContact(words);
+			}
+			else if (contactType == "business")
+			{
+				CreateBusinessContact(words);
+			}
 		}
 	}
+	catch (...)
+	{
+		throw exception("Directory cannot read this file: bad format!");
+	}
+	// Parse line by line
 }
 
 void DirectoryManagementSystem::ShowAllContacts()
@@ -304,7 +311,14 @@ void DirectoryManagementSystem::DisplayResult()
 
 istream& operator>>(istream& is, DirectoryManagementSystem dms) 
 {
-	dms.IngestData(is);
+	try 
+	{
+		dms.IngestData(is);
+	}
+	catch (exception e)
+	{
+		throw e;
+	}
 
 	return is;
 }
