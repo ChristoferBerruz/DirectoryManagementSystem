@@ -52,6 +52,6 @@ void SearchPersonByEmail::GetParametersFromCLI()
 {
 	cout << "Please enter email domain: ";
 	string emailDomain;
-	cin >> emailDomain;
+	getline(cin,emailDomain);
 	SetEmailDomain(emailDomain);
 }

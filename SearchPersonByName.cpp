@@ -12,7 +12,7 @@ void SearchPersonByName::GetParametersFromCLI()
 {
 	cout << "Please enter name: ";
 	string nameParam;
-	cin >> nameParam;
+	getline(cin,nameParam);
 	SetNameParam(nameParam);
 }
 

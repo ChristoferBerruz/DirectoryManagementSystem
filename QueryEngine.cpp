@@ -36,7 +36,7 @@ int CLIQueryEngine::GetSearchOptionFromCLI()
 	// Handle option to be between valid range
 	string lowerLim("1");
 	string upperLim("5");
-	while (cin >> option && lowerLim > option || option > upperLim)
+	while (getline(cin,option) && lowerLim > option || option > upperLim)
 		cout << "Please enter a valid option: ";
 
 	return stoi(option);
@@ -93,7 +93,7 @@ string CLIQueryEngine::DisplayQuery(const vector<Contact*>& contacts)
 
 	cout << "Please enter a valid option for Display Query: ";
 	string option;
-	while (cin >> option && (option != "1" && option != "2"))
+	while (getline(cin,option) && (option != "1" && option != "2"))
 		cout << "Please enter a valid option for Display Query: ";
 
 	string res;
@@ -124,7 +124,7 @@ string CLIQueryEngine::Query(const vector<Contact*>& contacts)
 	cout << "Available Queries are: (1) SearchQuery or (2) DisplayQuery." << endl;
 	string option;
 	cout << "Please enter an option for Query type: ";
-	while(cin >> option && (option != "1" && option != "2"))
+	while(getline(cin,option) && (option != "1" && option != "2"))
 		cout << "Please enter an option for Query type: ";
 
 	if (option == "1")

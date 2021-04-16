@@ -69,8 +69,6 @@ string DisplayPerson::FindContact(const vector<Contact*>& contacts)
 
 void DisplayPerson::GetParametersFromCLI()
 {
-	string dummy;
-	getline(cin, dummy);
 	cout << "Enter name of person: ";
 	string name;
 	getline(cin, name);

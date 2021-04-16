@@ -71,11 +71,11 @@ void SearchBusinessByEmailOrWebsite::GetParametersFromCLI()
 {
 	cout << "Please enter emailEnding: ";
 	string emailEnding;
-	cin >> emailEnding;
+	getline(cin,emailEnding);
 
 	cout << "Please enter websiteDomain: ";
 	string websiteDomain;
-	cin >> websiteDomain;
+	getline(cin,websiteDomain);
 
 	SetEmailEnding(emailEnding);
 	SetWebsiteDomain(websiteDomain);

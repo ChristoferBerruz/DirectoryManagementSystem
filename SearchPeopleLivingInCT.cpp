@@ -91,7 +91,7 @@ void SearchPeopleLivingInCT::GetParametersFromCLI()
 {
 	cout << "Please enter area code: ";
 	string areaCode;
-	cin >> areaCode;
+	getline(cin,areaCode);
 	SetAreaCode(areaCode);
 }
 

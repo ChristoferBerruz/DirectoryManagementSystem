@@ -74,6 +74,6 @@ void DisplayBusiness::GetParametersFromCLI()
 	cout << "Enter name of organization: ";
 
 	string organization;
-	cin >> organization;
+	getline(cin,organization);
 	SetBusinessName(organization);
 }

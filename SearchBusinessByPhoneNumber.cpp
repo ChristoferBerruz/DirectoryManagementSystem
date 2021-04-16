@@ -47,7 +47,7 @@ void SearchBusinessByPhoneNumber::GetParametersFromCLI()
 {
 	cout << "Please enter area code: ";
 	string areaCode;
-	cin >> areaCode;
+	getline(cin,areaCode);
 }
 
 string SearchBusinessByPhoneNumber::Execute(const vector<Contact*>& contacts)
