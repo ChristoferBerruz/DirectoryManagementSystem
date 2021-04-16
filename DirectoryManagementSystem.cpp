@@ -274,6 +274,11 @@ void DirectoryManagementSystem::Query()
 	queryResult = engine.Query(contacts);
 }
 
+void DirectoryManagementSystem::DisplayResult()
+{
+	cout << queryResult << endl;
+}
+
 istream& operator>>(istream& is, DirectoryManagementSystem dms) 
 {
 	dms.IngestData(is);
