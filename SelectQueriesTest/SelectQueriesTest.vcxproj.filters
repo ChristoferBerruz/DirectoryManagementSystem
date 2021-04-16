@@ -72,9 +72,6 @@
     <ClCompile Include="..\PersonPhoneContact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\QueryCoreEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\QueryEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

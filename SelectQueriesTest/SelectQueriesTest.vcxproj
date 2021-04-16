@@ -171,7 +171,6 @@
     <ClCompile Include="..\PersonContact.cpp" />
     <ClCompile Include="..\PersonEmailContact.cpp" />
     <ClCompile Include="..\PersonPhoneContact.cpp" />
-    <ClCompile Include="..\QueryCoreEngine.cpp" />
     <ClCompile Include="..\QueryEngine.cpp" />
     <ClCompile Include="..\SearchBusinessByEmailOrWebsite.cpp" />
     <ClCompile Include="..\SearchBusinessByPhoneNumber.cpp" />
