@@ -1,6 +1,10 @@
 #include "AreaCodesBook.h"
 #include <fstream>
 using namespace std;
+
+/// <summary>
+/// Reads from a hardcoded file that states and their respective zipcodes
+/// </summary>
 AreaCodesBook::AreaCodesBook()
 {
 	ifstream inputFile("areacodes.txt");
