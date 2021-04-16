@@ -29,14 +29,14 @@ int main()
 	}
 
 	char response;
-	cout << "Querying the Directory Management System (DMS). Enter any key to continue. Enter n to stop: ";
+	cout << "Querying the Directory Management System (DMS). Enter c to continue. Enter n to stop: ";
 	cin >> response;
 
 	while (response != 'n')
 	{
 		dms.Query();
 		dms.DisplayResult();
-		cout << "Querying the Directory Management System (DMS). Press ENTER to continue. Enter n to stop: ";
+		cout << "Querying the Directory Management System (DMS). Enter c to continue. Enter n to stop: ";
 		cin >> response;
 	}
 
