@@ -1,0 +1,7 @@
+7,business
+Vidoo,Tech,1-203-418-8723,lsaffe0@uol.com.br,www.yellowbook.com,198 Dakota Street,Indianapolis,Indiana,46207
+Meetz,Law,1-574-220-2337,jbussens1@wix.com,www.github.com,8716 Steensland Court,South Bend,Indiana,46620
+Feedfish,Law,1-716-116-2319,gpagon2@un.org,www.miitbeian.gov.cn,7343 Anderson Junction,Buffalo,New York,14269
+Feedfish,dbroadnicke4@uiuc.edu,www.homestead.com
+Mybuzz,Tech,1-202-593-4605,pplaskett3@networksolutions.com,www.google.com.au,66920 Summit Street,Washington,District of Columbia,20299
+Janyx,Pharma,1-432-695-7666,hmccoole4@bravesites.com,www.sphinn.com,1984 Northridge Crossing,Midland,Texas,79705

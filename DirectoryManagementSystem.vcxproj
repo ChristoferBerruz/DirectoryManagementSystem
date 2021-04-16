@@ -194,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="areacodes.txt" />
+    <Text Include="business-test.txt" />
     <Text Include="input1.txt" />
     <Text Include="input2.txt" />
     <Text Include="person-test.txt" />

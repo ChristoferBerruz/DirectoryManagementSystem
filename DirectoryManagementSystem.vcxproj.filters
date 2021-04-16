@@ -197,5 +197,6 @@
     <Text Include="input2.txt" />
     <Text Include="areacodes.txt" />
     <Text Include="person-test.txt" />
+    <Text Include="business-test.txt" />
   </ItemGroup>
 </Project>
