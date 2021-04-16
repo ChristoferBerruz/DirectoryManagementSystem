@@ -25,40 +25,37 @@ string DisplayBusiness::FindContact(const vector<Contact*>& contacts)
 		if (i == 0)
 		{
 			BusinessContact* business = dynamic_cast<BusinessContact*>(contact);
-			buffer << "Organization: " << business->GetName();
-			buffer << "Category: " << business->GetCategory();
+			buffer << FormatSimpleLine("Organization:", business->GetName());
+			buffer << FormatSimpleLine("Category:", business->GetCategory());
 		}
 
 		string className = typeid(*contact).name();
 		if (className == webBusiness)
 		{
 			BusinessWebContact* webContact = dynamic_cast<BusinessWebContact*>(contact);
-			buffer << "Web addresses: ";
 
 			vector<string> websites = webContact->GetWebAddresses();
-			buffer << FormatVector(websites) << endl;
+			buffer << FormatSimpleLine("Web addresses:", FormatVector(websites));
 
-			buffer << "Email addresses: ";
 			vector<string> emails = webContact->GetEmailAddresses();
-			buffer << FormatVector(emails) << endl;
+			buffer << FormatSimpleLine("Email addresses", FormatVector(emails));
 		}
 
 		if (className == phoneBusiness)
 		{
 			BusinessPhoneContact* phoneContact = dynamic_cast<BusinessPhoneContact*>(contact);
-			buffer << "Phone numbers: ";
-			buffer << FormatVector(phoneContact->GetPhoneNumbers()) << endl;
+			buffer << FormatSimpleLine("Phone numbers:", FormatVector(phoneContact->GetPhoneNumbers()));
 		}
 
 		if (className == addressBusiness)
 		{
 			BusinessAddressContact* addressContact = dynamic_cast<BusinessAddressContact*>(contact);
-			buffer << "Address: \n";
+			buffer << FormatSimpleLine("Address:", "");
 			Address address = addressContact->GetAddress();
-			buffer << "Street: " << address.GetStreet();
-			buffer << "City: " << address.GetCity();
-			buffer << "State: " << address.GetState();
-			buffer << "Zip: " << address.GetZipcode();
+			buffer << FormatPaddedLine("Street: ", address.GetStreet());
+			buffer << FormatPaddedLine("City: ", address.GetCity());
+			buffer << FormatPaddedLine("State: ", address.GetState());
+			buffer << FormatPaddedLine("Zip: ", address.GetZipcode());
 		}
 	}
 	return buffer.str();

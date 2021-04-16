@@ -24,8 +24,8 @@ string DisplayPerson::FindContact(const vector<Contact*>& contacts)
 		if (i == 0)
 		{
 			PersonContact* person = dynamic_cast<PersonContact*>(contact);
-			buffer << "Name: " << person->GetName() << endl;
-			buffer << "Gender: " << person->GetGender() << endl;
+			buffer << FormatSimpleLine("Name:", person->GetName());
+			buffer << FormatSimpleLine("Gender:", person->GetGender());
 		}
 
 		string className = typeid(*contact).name();
@@ -33,23 +33,23 @@ string DisplayPerson::FindContact(const vector<Contact*>& contacts)
 		if (className == emailPerson)
 		{
 			PersonEmailContact* emailContact = dynamic_cast<PersonEmailContact*>(contact);
-			buffer << "Email: " << FormatVector(emailContact->GetEmails()) << endl;
+			buffer << FormatSimpleLine("Email:", FormatVector(emailContact->GetEmails()));
 		}
 
 		if (className == phonePerson)
 		{
 			PersonPhoneContact* phoneContact = dynamic_cast<PersonPhoneContact*>(contact);
-			buffer << "Phone numbers: " << FormatVector(phoneContact->GetPhoneNumbers()) << endl;
+			buffer << FormatSimpleLine("Phone numbers:", FormatVector(phoneContact->GetPhoneNumbers()));
 		}
 		if (className == addressPerson)
 		{
 			PersonAddressContact* addressContact = dynamic_cast<PersonAddressContact*>(contact);
-			buffer << "Address: \n";
+			buffer << FormatSimpleLine("Address:", "");
 			Address address = addressContact->GetAddress();
-			buffer << "Street: " << address.GetStreet() << endl;
-			buffer << "City: " << address.GetCity() << endl;
-			buffer << "State: " << address.GetState() << endl;
-			buffer << "Zip: " << address.GetZipcode() << endl;
+			buffer << FormatPaddedLine("Street:", address.GetStreet());
+			buffer << FormatPaddedLine("City:", address.GetCity());
+			buffer << FormatPaddedLine("State:", address.GetState());
+			buffer << FormatPaddedLine("Zip:", address.GetZipcode());
 		}
 	}
 

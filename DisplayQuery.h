@@ -1,6 +1,7 @@
 #ifndef DISPLAY_QUERY_H
 #define DISPLAY_QUERY_H
 #include "BaseQuery.h"
+#include <iomanip>
 #include <sstream>
 class DisplayQuery : public BaseQuery
 {
@@ -11,6 +12,8 @@ public:
 	virtual ~DisplayQuery() {}
 protected:
 	string FormatVector(const vector<string>& elements);
+	string FormatSimpleLine(const string& label, const string& content);
+	string FormatPaddedLine(const string& label, const string& content);
 };
 
 #endif

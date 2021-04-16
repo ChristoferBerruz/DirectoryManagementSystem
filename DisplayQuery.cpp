@@ -11,3 +11,19 @@ string DisplayQuery::FormatVector(const vector<string>& elements)
 
 	return buffer.str();
 }
+
+string DisplayQuery::FormatSimpleLine(const string& label, const string& content)
+{
+	ostringstream buffer;
+
+	int cellLen = 20;
+	buffer << setw(cellLen) << left << label << setw(cellLen) << left << content << endl;
+	return buffer.str();
+}
+string DisplayQuery::FormatPaddedLine(const string& label, const string& content)
+{
+	ostringstream buffer;
+	int cellLen = 10;
+	buffer << setw(cellLen) << right<< "" << setw(cellLen) << left << label << setw(cellLen) << left << content << endl;
+	return buffer.str();
+}
