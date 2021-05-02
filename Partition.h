@@ -14,5 +14,6 @@ public:
 	Partition* GetNextPartition() const;
 	void SetNextPartition(Partition* partition);
 	BaseQuery* GetQuery() const;
+	friend ostream& operator<<(ostream& os, Partition& partition);
 };
 #endif // !PARTITION_H

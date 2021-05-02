@@ -1,60 +1,96 @@
 #include "DirectoryManagementSystem.h"
+#include "TimingWheel.h"
 #include <iostream>
+#include "BaseQuery.h"
+#include "SearchPersonByName.h"
 #include <fstream>
-#include "AreaCodesBook.h"
+#include <queue>
 using namespace std;
+
+struct UserInput
+{
+	int inputFileNum;
+	vector<string> fileNames;
+	int serverNum;
+	int queryNum;
+};
+
+
+UserInput getUserInput();
+queue<BaseQuery*> generateQueryQueue(int queryNum);
 
 int main()
 {
 	DirectoryManagementSystem dms;
-	cout << "Welcome to the Directory Management System" << endl;
+	TimingWheel wheel(10);
+	int totalSimulationTime = 0;
+	int simulationTime = 10;
 
-	bool promptUser = true;
-	int numFile;
-	while (promptUser)
+	UserInput userInput = getUserInput();
+	for (string fname : userInput.fileNames)
 	{
-		cout << "Please enter the number of files: ";
-		string fileNumber;
-		getline(cin, fileNumber);
-		try
-		{
-			numFile = stoi(fileNumber);
-			promptUser = false;
-		}
-		catch (...)
-		{
-			
-		}
-	}
-	
-
-	string fileName;
-
-	cout << "Enter the file names one at a time: " << endl;
-	for (int i = 0; i < numFile; i++)
-	{
-		getline(cin,fileName);
-		try {
-			ifstream inputFile(fileName);
-			dms.IngestData(inputFile);
-		}
-		catch (exception e)
-		{
-			cout << "Unable to read the file: " << e.what() << endl;
-		}
+		ifstream inputFile(fname); 
+		dms.IngestData(inputFile);
 	}
 
-	string response;
-	cout << "Querying the Directory Management System (DMS). Enter c to continue. Enter n to stop: ";
-	getline(cin, response);
-
-	while (response != "n")
+	queue<int> availableServers;
+	for (int i = 0; i < userInput.serverNum; i++)
 	{
-		dms.Query();
-		dms.DisplayResult();
-		cout << "Querying the Directory Management System (DMS). Enter c to continue. Enter n to stop: ";
-		getline(cin, response);
+		availableServers.push(i + 1);
 	}
 
-	cout << "Exiting the Directory Management System." << endl;
+	queue<BaseQuery*> queryQueue = generateQueryQueue(userInput.queryNum);
+	while (!queryQueue.empty())
+	{
+		wheel.Schedule(dms, queryQueue, availableServers);
+		cout << wheel;
+		wheel.IncreaseInternalTime();
+		totalSimulationTime++;
+	}
+
+	cout << wheel.GetInternalStats();
+
+}
+
+UserInput getUserInput()
+{
+
+	int numberOfFiles;
+	cout << "Please enter the number of file: ";
+	cin >> numberOfFiles;
+	vector<string> fileNames;
+	cout << "Please enter the name of files. One at a time.\n";
+
+	// Dump remaining new line
+	string dummy;
+	getline(cin, dummy);
+	for (int i = 0; i < numberOfFiles; i++)
+	{
+		cout << "Filename: ";
+		string fname;
+		getline(cin, fname);
+		fileNames.push_back(fname);
+	}
+
+	int serverNum;
+	cout << "Please enter the number of servers: ";
+	cin >> serverNum;
+
+	int queryNum;
+	cout << "Please enter the number of queries: ";
+	cin >> queryNum;
+
+	UserInput userInput{numberOfFiles, fileNames, serverNum, queryNum};
+
+	return userInput;
+}
+
+queue<BaseQuery*> generateQueryQueue(int queryNum)
+{
+	queue<BaseQuery*> queries;
+	for (int i = 0; i < queryNum; i++)
+	{
+		queries.push(new SearchPersonByName("Freya McDaniel"));
+	}
+	return queries;
 }

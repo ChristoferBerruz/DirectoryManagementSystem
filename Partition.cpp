@@ -1,6 +1,7 @@
 #include "Partition.h"
-
-
+#include <typeinfo>
+#include <iostream>
+using namespace std;
 Partition::Partition(BaseQuery* query, int serverNum)
 {
 	nextPartition = NULL;
@@ -32,4 +33,13 @@ Partition::~Partition()
 {
 	if (nextPartition)
 		delete nextPartition;
+}
+
+ostream& operator<<(ostream& os, Partition& partition)
+{
+	os << "{severNum: " << partition.serverNum << ", query: " <<
+		typeid(*partition.query).name() << "}";
+	if (partition.nextPartition)
+		os << " -> "  << *partition.nextPartition;
+	return os;
 }

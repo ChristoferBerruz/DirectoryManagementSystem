@@ -151,6 +151,7 @@
     <ClInclude Include="DisplayPerson.h" />
     <ClInclude Include="DisplayQuery.h" />
     <ClInclude Include="DirectoryManagementSystem.h" />
+    <ClInclude Include="Partition.h" />
     <ClInclude Include="PersonAddressContact.h" />
     <ClInclude Include="PersonContact.h" />
     <ClInclude Include="PersonEmailContact.h" />
@@ -162,6 +163,8 @@
     <ClInclude Include="SearchPersonByEmail.h" />
     <ClInclude Include="SearchPersonByName.h" />
     <ClInclude Include="SearchQuery.h" />
+    <ClInclude Include="Statistics.h" />
+    <ClInclude Include="TimingWheel.h" />
     <ClInclude Include="Validator.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +180,7 @@
     <ClCompile Include="DisplayPerson.cpp" />
     <ClCompile Include="DisplayQuery.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Partition.cpp" />
     <ClCompile Include="PersonAddressContact.cpp" />
     <ClCompile Include="PersonContact.cpp" />
     <ClCompile Include="PersonEmailContact.cpp" />
@@ -188,6 +192,8 @@
     <ClCompile Include="SearchPersonByEmail.cpp" />
     <ClCompile Include="SearchPersonByName.cpp" />
     <ClCompile Include="SearchQuery.cpp" />
+    <ClCompile Include="Statistics.cpp" />
+    <ClCompile Include="TimingWheel.cpp" />
     <ClCompile Include="Validator.cpp" />
   </ItemGroup>
   <ItemGroup>

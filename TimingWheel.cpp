@@ -1,5 +1,6 @@
 #include "TimingWheel.h"
 #include <iostream>
+#include <typeinfo>
 
 using namespace std;
 TimingWheel::TimingWheel(int maxDelay)
@@ -19,6 +20,7 @@ void TimingWheel::Insert(int processingTime, int serverNum, BaseQuery* query)
 	// If nothing in slot, just allocate partition
 	if (!partition)
 	{
+		cout << "[NEW PARTITION] No partition in slot. Allocating a new partition at " << slotNum << endl;
 		wheelSlots[slotNum] = new Partition(query, serverNum);
 	}
 	else {
@@ -27,6 +29,7 @@ void TimingWheel::Insert(int processingTime, int serverNum, BaseQuery* query)
 		{
 			partition = partition->GetNextPartition();
 		}
+		cout << "[APPEND PARTITION] Appending partition at the end of the partition at " << slotNum << endl;
 		partition->SetNextPartition(new Partition(query, serverNum));
 	}
 }
@@ -35,16 +38,22 @@ void TimingWheel::Schedule(DirectoryManagementSystem& dms, queue<BaseQuery*>& qu
 {
 	// First, serve the current slot
 	Partition* currentPartition = wheelSlots[currentSlot];
+
+	cout << "+++ TimingWheel scheduling at " << currentSlot << " +++" << endl;
+	if (!currentPartition)
+		cout << "[NOTHING TO SERVE] No partitions to process in current slot\n";
 	while (currentPartition)
 	{
 		BaseQuery* query = currentPartition->GetQuery();
 		string result = query->Execute(dms.GetContacts());
-		cout << "Serving a query. Result: " << endl << result << endl;
-		cout << "Server number: " << currentPartition->GetServerNum() << " became available\n";
+		cout << "[SERVE] Serving a query.\n";
+		cout << "[QUERY RES]\n" << result << endl;
+		cout << "[FREEING SERVER] Server number " << currentPartition->GetServerNum() << endl;
 		availableServers.push(currentPartition->GetServerNum());
+		stats.UpdateStats(typeid(*query).name(), currentPartition->GetServerNum());
 		currentPartition = currentPartition->GetNextPartition();
 	}
-	
+
 	// Clear it, because it was serve
 	ClearCurrentSlot();
 
@@ -55,6 +64,8 @@ void TimingWheel::Schedule(DirectoryManagementSystem& dms, queue<BaseQuery*>& qu
 		queryQueue.pop();
 		availableServers.pop();
 	}
+
+	cout << "+++ END +++ " << endl << endl << endl;
 }
 
 void TimingWheel::ClearCurrentSlot()
@@ -66,4 +77,39 @@ void TimingWheel::ClearCurrentSlot()
 void TimingWheel::IncreaseInternalTime()
 {
 	currentSlot = (currentSlot + 1) % maxDelay;
+}
+
+string TimingWheel::GetInternalStats()
+{
+	return stats.GenerateReport();
+}
+
+/// <summary>
+/// Simply show the status of the timing wheel by looking at the partitions
+/// </summary>
+/// <returns></returns>
+string TimingWheel::PrintStatus()
+{
+	ostringstream buffer;
+
+	buffer << "--- Status of timing Wheel ---" << endl;
+	for (int idx = 0; idx < wheelSlots.size(); idx++)
+	{
+		buffer << idx << " -> ";
+		if (wheelSlots[idx])
+			buffer << *wheelSlots[idx];
+		else
+			buffer << "NULL";
+		buffer << endl;
+	}
+
+	buffer << "--- END ---\n\n";
+
+	return buffer.str();
+}
+
+ostream& operator<<(ostream& os, TimingWheel& wheel)
+{
+	os << wheel.PrintStatus();
+	return os;
 }
