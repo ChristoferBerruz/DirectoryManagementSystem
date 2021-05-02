@@ -42,7 +42,7 @@ void TimingWheel::Insert(int processingTime, int serverNum, BaseQuery* query)
 	}
 }
 
-void TimingWheel::Schedule(DirectoryManagementSystem& dms, queue<BaseQuery*>& queryQueue, queue<int>& availableServers)
+void TimingWheel::Schedule(DirectoryManagementSystem& dms, queue<QueryRequest>& queryQueue, queue<int>& availableServers)
 {
 	// First, serve the current slot
 	Partition* currentPartition = wheelSlots[currentSlot];
@@ -69,8 +69,8 @@ void TimingWheel::Schedule(DirectoryManagementSystem& dms, queue<BaseQuery*>& qu
 	// Allocate until no more servers available and queryQueue is not empty
 	while (!availableServers.empty() && !queryQueue.empty())
 	{
-		int dueAfter = rand() % maxDelay + 1;
-		Insert(dueAfter, availableServers.front(), queryQueue.front());
+		QueryRequest request = queryQueue.front();
+		Insert(request.GetDuration(), availableServers.front(), request.GetQuery());
 		queryQueue.pop();
 		availableServers.pop();
 	}

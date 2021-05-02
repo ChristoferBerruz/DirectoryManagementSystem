@@ -6,6 +6,7 @@
 #include "Partition.h"
 #include "Statistics.h"
 #include "DirectoryManagementSystem.h"
+#include "QueryRequest.h"
 class TimingWheel
 {
 private:
@@ -18,7 +19,7 @@ private:
 public:
 	TimingWheel(int maxDelay);
 	void Insert(int processingTime, int serverNum, BaseQuery* query);
-	void Schedule(DirectoryManagementSystem& dms, queue<BaseQuery*>& queryQueue, queue<int>& availableServers);
+	void Schedule(DirectoryManagementSystem& dms, queue<QueryRequest>& queryQueue, queue<int>& availableServers);
 	void ClearCurrentSlot();
 	bool IsEmpty();
 	void IncreaseInternalTime();
