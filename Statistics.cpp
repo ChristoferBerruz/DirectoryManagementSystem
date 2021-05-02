@@ -1,6 +1,7 @@
 #include "Statistics.h"
 #include <iomanip>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
 void Statistics::UpdateQueryFrequencies(const string& queryType)
@@ -44,9 +45,69 @@ void Statistics::UpdateStats(const string& queryType, int serverNum)
 string Statistics::GenerateReport()
 {
 	ostringstream buffer;
-	buffer << StatsAsTable(frequenciesOfQueryType, "QueryType", "Frequency") << endl;
-	buffer << StatsAsTable(frequenciesOfServer, "ServerNum", "Frequency") << endl;
+
+	int statisticsShown = 0;
+	buffer << "Statistics Report for Servers & Queries \n";
+
+	int totalQueries = 0;
+	for (auto row : frequenciesOfQueryType)
+	{
+		totalQueries += row.second;
+	}
+
+	buffer << ++statisticsShown << ") Total queries served: " << totalQueries << endl;
+	buffer << ++statisticsShown <<  ") Number of queries served by each server \n";
+	buffer << StatsAsTable(frequenciesOfServer, "Sever Number", "Number of queries served");
+	buffer << ++statisticsShown << ") Frequencies of queries per type\n";
+	buffer << StatsAsTable(frequenciesOfQueryType, "Query Type", "Frequency") << endl;
+
+	vector<pair<string, int>>sortedServers = GetSortedKeyVals(frequenciesOfServer);
+	if (sortedServers.size() > 0)
+	{
+		buffer << ++statisticsShown << ") The most BUSY server: ";
+		buffer << sortedServers[0].first << " with " << sortedServers[0].second << " queries\n";
+	}
+
+	if (sortedServers.size() > 1)
+	{
+		buffer << ++statisticsShown << ") the most IDLE server: ";
+		buffer << sortedServers.back().first << " with " << sortedServers.back().second << " queries\n";
+	}
+
+	vector<pair<string, int>> sortedQueries = GetSortedKeyVals(frequenciesOfQueryType);
+	if (sortedQueries.size() > 0)
+	{
+		buffer << ++statisticsShown << ") The MOST served type of query: ";
+		buffer << sortedQueries[0].first << " with " << sortedQueries[0].second << " appearances\n";
+	}
+
+	if (sortedQueries.size() > 1)
+	{
+		buffer << ++statisticsShown << ") The LEAST served type of query: ";
+		buffer << sortedQueries.back().first << " with " << sortedQueries.back().second << " appearances\n";
+	}
 	return buffer.str();
+}
+
+
+/// <summary>
+/// Sorts the dictionary by frequencies
+/// </summary>
+/// <param name="dictionary"></param>
+/// <returns></returns>
+vector<pair<string, int>> Statistics::GetSortedKeyVals(const map<string, int>& dictionary)
+{
+	vector<pair<string, int>> res;
+	for (auto row : dictionary)
+	{
+		res.push_back(row);
+	}
+
+	sort(res.begin(), res.end(), [](pair<string, int>& left, pair<string, int>& right) {
+		return left.second > right.second;
+	});
+
+	return res;
 }
 
 string Statistics::StatsAsTable(const map<string, int>& dictionary, const string& columnOne, const string& columnTwo)
