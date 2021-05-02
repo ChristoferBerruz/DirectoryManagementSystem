@@ -157,6 +157,7 @@
     <ClInclude Include="PersonEmailContact.h" />
     <ClInclude Include="PersonPhoneContact.h" />
     <ClInclude Include="QueryEngine.h" />
+    <ClInclude Include="QueryRequest.h" />
     <ClInclude Include="SearchBusinessByEmailOrWebsite.h" />
     <ClInclude Include="SearchBusinessByPhoneNumber.h" />
     <ClInclude Include="SearchPeopleLivingInCT.h" />
