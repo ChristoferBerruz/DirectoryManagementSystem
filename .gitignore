@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Results file from simulation
+status.txt
+
 # User-specific files
 *.rsuser
 *.suo

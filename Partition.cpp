@@ -2,6 +2,12 @@
 #include <typeinfo>
 #include <iostream>
 using namespace std;
+
+/// <summary>
+/// A partition OWNS the query pointer passed to it.
+/// </summary>
+/// <param name="query"></param>
+/// <param name="serverNum"></param>
 Partition::Partition(BaseQuery* query, int serverNum)
 {
 	nextPartition = NULL;
@@ -29,8 +35,11 @@ BaseQuery* Partition::GetQuery() const
 	return query;
 }
 
+
 Partition::~Partition()
 {
+	if (query)
+		delete query;
 	if (nextPartition)
 		delete nextPartition;
 }

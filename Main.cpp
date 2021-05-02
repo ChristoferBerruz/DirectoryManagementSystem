@@ -1,6 +1,7 @@
 #include "DirectoryManagementSystem.h"
 #include "TimingWheel.h"
 #include <iostream>
+#include <fstream>
 #include "BaseQuery.h"
 #include "DisplayBusiness.h"
 #include "DisplayPerson.h"
@@ -22,15 +23,21 @@ struct UserInput
 };
 
 
+// Routines to be implemented in main module
 UserInput getUserInput();
 queue<BaseQuery*> generateQueryQueue(int queryNum);
+void printStatus(ofstream& outputFile);
+void printFinalStatistics();
+
+// Global variables used
+int totalSimulationTime = 0;
+const int MAX_DELAY = 10;
+DirectoryManagementSystem dms;
+TimingWheel wheel(MAX_DELAY);
+
 
 int main()
 {
-	DirectoryManagementSystem dms;
-	TimingWheel wheel(10);
-	int totalSimulationTime = 0;
-	int simulationTime = 10;
 
 	UserInput userInput = getUserInput();
 	for (string fname : userInput.fileNames)
@@ -45,17 +52,35 @@ int main()
 		availableServers.push(i + 1);
 	}
 
+	ofstream outputFile("status.txt");
+
 	queue<BaseQuery*> queryQueue = generateQueryQueue(userInput.queryNum);
 	while (!queryQueue.empty() || !wheel.IsEmpty())
 	{
 		wheel.Schedule(dms, queryQueue, availableServers);
-		cout << wheel;
+		printStatus(outputFile);
 		wheel.IncreaseInternalTime();
 		totalSimulationTime++;
 	}
 
-	cout << wheel.GetInternalStats();
+	printFinalStatistics();
 
+}
+
+void printFinalStatistics()
+{
+	cout << "--------------------------- FINAL STATISTICS--------------------------------" << endl;
+	cout << "Total simulation time: " << totalSimulationTime << endl;
+	cout << wheel.GetInternalStats();
+}
+
+void printStatus(ofstream& outputFile)
+{
+	ostringstream buffer;
+	buffer << "Simulation time: " << totalSimulationTime << endl;
+	buffer << wheel;
+	cout << buffer.str();
+	outputFile << buffer.str();
 }
 
 UserInput getUserInput()
