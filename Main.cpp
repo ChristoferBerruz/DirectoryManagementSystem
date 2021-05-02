@@ -10,6 +10,7 @@
 #include "SearchPeopleLivingInCT.h"
 #include "SearchPersonByEmail.h"
 #include "SearchPersonByName.h"
+#include "QueryRequest.h"
 #include <fstream>
 #include <queue>
 using namespace std;
@@ -25,19 +26,18 @@ struct UserInput
 
 // Routines to be implemented in main module
 UserInput getUserInput();
-queue<BaseQuery*> generateQueryQueue(int queryNum);
-void printStatus(ofstream& outputFile);
-void printFinalStatistics();
-
-// Global variables used
-int totalSimulationTime = 0;
-const int MAX_DELAY = 10;
-DirectoryManagementSystem dms;
-TimingWheel wheel(MAX_DELAY);
+queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay);
+void printStatus(ofstream& outputFile, queue<QueryRequest> requests, int totalSimulationTime, TimingWheel& wheel);
+void printFinalStatistics(TimingWheel& wheel, int totalSimulationTime);
 
 
 int main()
 {
+	// Needed information for simulation
+	int totalSimulationTime = 0;
+	const int MAX_DELAY = 10;
+	DirectoryManagementSystem dms;
+	TimingWheel wheel(MAX_DELAY);
 
 	UserInput userInput = getUserInput();
 	for (string fname : userInput.fileNames)
@@ -54,30 +54,38 @@ int main()
 
 	ofstream outputFile("status.txt");
 
-	queue<BaseQuery*> queryQueue = generateQueryQueue(userInput.queryNum);
+	queue<QueryRequest> queryQueue = generateQueryQueue(userInput.queryNum, MAX_DELAY);
 	while (!queryQueue.empty() || !wheel.IsEmpty())
 	{
 		wheel.Schedule(dms, queryQueue, availableServers);
-		printStatus(outputFile);
+		printStatus(outputFile, queryQueue,totalSimulationTime, wheel);
 		wheel.IncreaseInternalTime();
 		totalSimulationTime++;
 	}
 
-	printFinalStatistics();
+	printFinalStatistics(wheel, totalSimulationTime);
 
 }
 
-void printFinalStatistics()
+void printFinalStatistics(TimingWheel& wheel, int totalSimulationTime)
 {
 	cout << "--------------------------- FINAL STATISTICS--------------------------------" << endl;
 	cout << "Total simulation time: " << totalSimulationTime << endl;
 	cout << wheel.GetInternalStats();
 }
 
-void printStatus(ofstream& outputFile)
+void printStatus(ofstream& outputFile, queue<QueryRequest> requests, int totalSimulationTime, TimingWheel& wheel)
 {
 	ostringstream buffer;
 	buffer << "Simulation time: " << totalSimulationTime << endl;
+	buffer << "Query Queue: [";
+	while (!requests.empty())
+	{
+		buffer << requests.front();
+		buffer << ", ";
+		requests.pop();
+	}
+	buffer << "]" << endl;
 	buffer << wheel;
 	cout << buffer.str();
 	outputFile << buffer.str();
@@ -116,9 +124,9 @@ UserInput getUserInput()
 	return userInput;
 }
 
-queue<BaseQuery*> generateQueryQueue(int queryNum)
+queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay)
 {
-	queue<BaseQuery*> queries;
+	queue<QueryRequest> queries;
 
 	// 7 query types, so 7 query options
 	int totalOptions = 7;
@@ -126,32 +134,40 @@ queue<BaseQuery*> generateQueryQueue(int queryNum)
 	for (int i = 0; i < queryNum; i++)
 	{
 		option = rand() % totalOptions + 1;
+		int dueAfter = rand() % maxDelay + 1;
+		BaseQuery* query = NULL;
 		switch (option)
 		{
 		case 1:
-			queries.push(new DisplayPerson("Freya McDaniel"));
+			query = new DisplayPerson("Freya McDaniel");
 			break;
 		case 2:
-			queries.push(new DisplayBusiness("Vidoo"));
+			query = new DisplayBusiness("Vidoo");
 			break;
 		case 3:
-			queries.push(new SearchBusinessByEmailOrWebsite("com", "com"));
+			query = new SearchBusinessByEmailOrWebsite("com", "com");
 			break;
 		case 4:
-			queries.push(new SearchBusinessByPhoneNumber("203"));
+			query = new SearchBusinessByPhoneNumber("203");
 			break;
 		case 5:
-			queries.push(new SearchPeopleLivingInCT("203"));
+			query = new SearchPeopleLivingInCT("203");
 			break;
 		case 6:
-			queries.push(new SearchPersonByEmail(".org"));
+			query = new SearchPersonByEmail(".org");
 			break;
 		case 7:
-			queries.push(new SearchPersonByName("Freya McDaniel"));
+			query = new SearchPersonByName("Freya McDaniel");
 			break;
 		default:
 			throw exception("QUERY NOT SUPPORTED.");
 			break;
+		}
+
+		if (query)
+		{
+			QueryRequest request(query, dueAfter);
+			queries.push(request);
 		}
 	}
 	return queries;
