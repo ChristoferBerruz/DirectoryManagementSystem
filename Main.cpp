@@ -145,10 +145,10 @@ queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay)
 			query = new DisplayBusiness("Vidoo");
 			break;
 		case 3:
-			query = new SearchBusinessByEmailOrWebsite("com", "com");
+			query = new SearchBusinessByEmailOrWebsite(".com", ".com");
 			break;
 		case 4:
-			query = new SearchBusinessByPhoneNumber("203");
+			query = new SearchBusinessByPhoneNumber("423");
 			break;
 		case 5:
 			query = new SearchPeopleLivingInCT("203");
@@ -157,7 +157,7 @@ queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay)
 			query = new SearchPersonByEmail(".org");
 			break;
 		case 7:
-			query = new SearchPersonByName("Freya McDaniel");
+			query = new SearchPersonByName("W");
 			break;
 		default:
 			throw exception("QUERY NOT SUPPORTED.");
