@@ -14,11 +14,13 @@ private:
 	int currentSlot;
 	Statistics stats;
 	ostringstream status;
+	int partitionsAllocated;
 public:
 	TimingWheel(int maxDelay);
 	void Insert(int processingTime, int serverNum, BaseQuery* query);
 	void Schedule(DirectoryManagementSystem& dms, queue<BaseQuery*>& queryQueue, queue<int>& availableServers);
 	void ClearCurrentSlot();
+	bool IsEmpty();
 	void IncreaseInternalTime();
 	string GetInternalStats();
 	string PrintStatus();

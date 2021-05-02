@@ -11,10 +11,18 @@ TimingWheel::TimingWheel(int maxDelay)
 	{
 		wheelSlots.push_back(NULL);
 	}
+	partitionsAllocated = 0;
+}
+
+bool TimingWheel::IsEmpty()
+{
+	return partitionsAllocated == 0;
 }
 
 void TimingWheel::Insert(int processingTime, int serverNum, BaseQuery* query)
 {
+
+	partitionsAllocated++;
 	int slotNum = (currentSlot + processingTime) % maxDelay;
 	Partition* partition = wheelSlots[slotNum];
 	// If nothing in slot, just allocate partition
@@ -50,6 +58,7 @@ void TimingWheel::Schedule(DirectoryManagementSystem& dms, queue<BaseQuery*>& qu
 		cout << "[QUERY RES]\n" << result << endl;
 		cout << "[FREEING SERVER] Server number " << currentPartition->GetServerNum() << endl;
 		availableServers.push(currentPartition->GetServerNum());
+		partitionsAllocated--;
 		stats.UpdateStats(typeid(*query).name(), currentPartition->GetServerNum());
 		currentPartition = currentPartition->GetNextPartition();
 	}
@@ -60,7 +69,8 @@ void TimingWheel::Schedule(DirectoryManagementSystem& dms, queue<BaseQuery*>& qu
 	// Allocate until no more servers available and queryQueue is not empty
 	while (!availableServers.empty() && !queryQueue.empty())
 	{
-		Insert(1, availableServers.front(), queryQueue.front());
+		int dueAfter = rand() % maxDelay + 1;
+		Insert(dueAfter, availableServers.front(), queryQueue.front());
 		queryQueue.pop();
 		availableServers.pop();
 	}

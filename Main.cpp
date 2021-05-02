@@ -46,7 +46,7 @@ int main()
 	}
 
 	queue<BaseQuery*> queryQueue = generateQueryQueue(userInput.queryNum);
-	while (!queryQueue.empty())
+	while (!queryQueue.empty() || !wheel.IsEmpty())
 	{
 		wheel.Schedule(dms, queryQueue, availableServers);
 		cout << wheel;
