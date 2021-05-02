@@ -2,6 +2,12 @@
 #include "TimingWheel.h"
 #include <iostream>
 #include "BaseQuery.h"
+#include "DisplayBusiness.h"
+#include "DisplayPerson.h"
+#include "SearchBusinessByEmailOrWebsite.h"
+#include "SearchBusinessByPhoneNumber.h"
+#include "SearchPeopleLivingInCT.h"
+#include "SearchPersonByEmail.h"
 #include "SearchPersonByName.h"
 #include <fstream>
 #include <queue>
@@ -88,9 +94,40 @@ UserInput getUserInput()
 queue<BaseQuery*> generateQueryQueue(int queryNum)
 {
 	queue<BaseQuery*> queries;
+
+	// 7 query types, so 7 query options
+	int totalOptions = 7;
+	int option = 0;
 	for (int i = 0; i < queryNum; i++)
 	{
-		queries.push(new SearchPersonByName("Freya McDaniel"));
+		option = rand() % totalOptions + 1;
+		switch (option)
+		{
+		case 1:
+			queries.push(new DisplayPerson("Freya McDaniel"));
+			break;
+		case 2:
+			queries.push(new DisplayBusiness("Vidoo"));
+			break;
+		case 3:
+			queries.push(new SearchBusinessByEmailOrWebsite("com", "com"));
+			break;
+		case 4:
+			queries.push(new SearchBusinessByPhoneNumber("203"));
+			break;
+		case 5:
+			queries.push(new SearchPeopleLivingInCT("203"));
+			break;
+		case 6:
+			queries.push(new SearchPersonByEmail(".org"));
+			break;
+		case 7:
+			queries.push(new SearchPersonByName("Freya McDaniel"));
+			break;
+		default:
+			throw exception("QUERY NOT SUPPORTED.");
+			break;
+		}
 	}
 	return queries;
 }
