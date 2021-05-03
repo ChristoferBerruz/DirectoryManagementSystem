@@ -19,6 +19,7 @@
 #include <typeinfo>
 #include <vector>
 #include <iostream>
+#include <set>
 using namespace std;
 class DirectoryManagementSystem
 {
@@ -27,8 +28,9 @@ private:
 	~DirectoryManagementSystem();
 	DirectoryManagementSystem() {}
 	DirectoryManagementSystem& operator=(const DirectoryManagementSystem& dms){}
-	DirectoryManagementSystem(const DirectoryManagementSystem& dms){}
+	DirectoryManagementSystem(const DirectoryManagementSystem& dms) {}
 	vector<Contact*> contacts;
+	set<string> uniqueNames;
 	string queryResult;
 	Validator validator;
 	CLIQueryEngine engine;
@@ -47,6 +49,7 @@ public:
 	void IngestData(std::istream& is);
 	void ShowAllContacts();
 	vector<Contact*>& GetContacts() { return contacts; }
+	size_t GetTotalUniqueContacts() { return uniqueNames.size(); }
 	friend std::istream& operator>>(std::istream& is, DirectoryManagementSystem dms);
 	friend ostream& operator<<(ostream& os, DirectoryManagementSystem dms);
 };

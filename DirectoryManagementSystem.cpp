@@ -40,6 +40,7 @@ void DirectoryManagementSystem::CreatePersonContact(const vector<string>& words)
 	vector<string>::const_iterator word;
 	int i = 0;
 	string name = words[i++];
+	uniqueNames.insert(name);
 	string gender;
 	if (validator.IsGender(words[i]))
 	{
@@ -107,6 +108,7 @@ void DirectoryManagementSystem::CreateBusinessContact(const vector<string>& word
 {
 	int i = 0;
 	string name = words[i++];
+	uniqueNames.insert(name);
 	string category = words[i];
 	bool isPhone = validator.IsPhoneNumber(category);
 	bool isEmail = validator.IsEmail(category);

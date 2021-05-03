@@ -28,7 +28,7 @@ struct UserInput
 UserInput getUserInput();
 queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay);
 void printStatus(ofstream& outputFile, queue<QueryRequest> requests, int totalSimulationTime, TimingWheel& wheel);
-void printFinalStatistics(TimingWheel& wheel, int totalSimulationTime);
+void printFinalStatistics(TimingWheel& wheel, int totalSimulationTime, DirectoryManagementSystem& dms);
 
 
 int main()
@@ -63,16 +63,17 @@ int main()
 		totalSimulationTime++;
 	}
 
-	printFinalStatistics(wheel, totalSimulationTime);
+	printFinalStatistics(wheel, totalSimulationTime, *dms);
 
 	DirectoryManagementSystem::DeleteInstance();
 
 }
 
-void printFinalStatistics(TimingWheel& wheel, int totalSimulationTime)
+void printFinalStatistics(TimingWheel& wheel, int totalSimulationTime, DirectoryManagementSystem& dms)
 {
 	cout << "--------------------------- FINAL STATISTICS--------------------------------" << endl;
 	cout << "Total simulation time: " << totalSimulationTime << endl;
+	cout << "Total size of directory (unique names): " << dms.GetTotalUniqueContacts() << endl;
 	cout << wheel.GetInternalStats();
 }
 
