@@ -85,6 +85,11 @@ string CLIQueryEngine::SearchQuery(const vector<Contact*>& contacts)
 }
 
 
+/// <summary>
+/// Handles creation and execution displays queries.
+/// </summary>
+/// <param name="contacts"></param>
+/// <returns></returns>
 string CLIQueryEngine::DisplayQuery(const vector<Contact*>& contacts)
 {
 	cout << "Available Display Queries are:\n";

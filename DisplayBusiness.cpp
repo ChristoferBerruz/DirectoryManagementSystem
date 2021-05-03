@@ -26,6 +26,8 @@ string DisplayBusiness::FindContact(const vector<Contact*>& contacts)
 	string webBusiness = typeid(BusinessWebContact).name();
 	string phoneBusiness = typeid(BusinessPhoneContact).name();
 	string addressBusiness = typeid(BusinessAddressContact).name();
+
+	// Go over all the contacts for the business, check its type, and output to buffer
 	for (int i = 0; i < businessContacts.size(); i++)
 	{
 		Contact* contact = businessContacts[i];

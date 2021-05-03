@@ -27,6 +27,8 @@ string DisplayPerson::FindContact(const vector<Contact*>& contacts)
 
 	// We output here
 	ostringstream buffer;
+
+	// Go over all the contacts for the person, check its type, and output to buffer
 	for (int i = 0; i < personContacts.size(); i++)
 	{
 		Contact* contact = personContacts[i];

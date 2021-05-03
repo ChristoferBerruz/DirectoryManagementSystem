@@ -35,6 +35,7 @@ void Statistics::UpdateQueriesServedByServer(const string& queryType, int server
 	serverStats[serverNum][queryType]++;
 }
 
+
 void Statistics::UpdateStats(const string& queryType, int serverNum)
 {
 	UpdateQueryFrequencies(queryType);
@@ -42,6 +43,11 @@ void Statistics::UpdateStats(const string& queryType, int serverNum)
 	UpdateQueriesServedByServer(queryType, serverNum);
 }
 
+/// <summary>
+/// Generates a simple report of the internal stats. It includes a description
+/// of how many times a server and query was allocated
+/// </summary>
+/// <returns></returns>
 string Statistics::GenerateReport()
 {
 	ostringstream buffer;
@@ -50,7 +56,7 @@ string Statistics::GenerateReport()
 	buffer << "Statistics Report for Servers & Queries \n";
 
 	int totalQueries = 0;
-	for (auto row : frequenciesOfQueryType)
+	for (auto& row : frequenciesOfQueryType)
 	{
 		totalQueries += row.second;
 	}
@@ -110,6 +116,14 @@ vector<pair<string, int>> Statistics::GetSortedKeyVals(const map<string, int>& d
 	return res;
 }
 
+
+/// <summary>
+/// Formats a map as a table with some headings.
+/// </summary>
+/// <param name="dictionary"></param>
+/// <param name="columnOne"></param>
+/// <param name="columnTwo"></param>
+/// <returns></returns>
 string Statistics::StatsAsTable(const map<string, int>& dictionary, const string& columnOne, const string& columnTwo)
 {
 	ostringstream buffer;

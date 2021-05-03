@@ -1,4 +1,10 @@
 #include "DisplayQuery.h"
+
+/// <summary>
+/// Formats a vector by dumping all elements separated by commas
+/// </summary>
+/// <param name="elements"></param>
+/// <returns></returns>
 string DisplayQuery::FormatVector(const vector<string>& elements)
 {
 	ostringstream buffer;
@@ -12,6 +18,13 @@ string DisplayQuery::FormatVector(const vector<string>& elements)
 	return buffer.str();
 }
 
+
+/// <summary>
+/// Returns a string with fixed spacing between words
+/// </summary>
+/// <param name="label"></param>
+/// <param name="content"></param>
+/// <returns></returns>
 string DisplayQuery::FormatSimpleLine(const string& label, const string& content)
 {
 	ostringstream buffer;
@@ -21,6 +34,13 @@ string DisplayQuery::FormatSimpleLine(const string& label, const string& content
 	return buffer.str();
 }
 
+
+/// <summary>
+/// Returns a string with fixed spacing between words and padding at the beginning
+/// </summary>
+/// <param name="label"></param>
+/// <param name="content"></param>
+/// <returns></returns>
 string DisplayQuery::FormatPaddedLine(const string& label, const string& content)
 {
 	ostringstream buffer;

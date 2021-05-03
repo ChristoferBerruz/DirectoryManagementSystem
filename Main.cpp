@@ -15,6 +15,9 @@
 #include <queue>
 using namespace std;
 
+/// <summary>
+/// Struct that holds all necessary user information for the simulation to run
+/// </summary>
 struct UserInput
 {
 	int inputFileNum;
@@ -26,7 +29,7 @@ struct UserInput
 
 // Routines to be implemented in main module
 UserInput getUserInput();
-queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay);
+queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay, int minDelay);
 void printStatus(ofstream& outputFile, queue<QueryRequest> requests, int totalSimulationTime, TimingWheel& wheel);
 void printFinalStatistics(TimingWheel& wheel, int totalSimulationTime, DirectoryManagementSystem& dms);
 
@@ -36,6 +39,7 @@ int main()
 	// Needed information for simulation
 	int totalSimulationTime = 0;
 	const int MAX_DELAY = 10;
+	const int MIN_DELAY = 3;
 	DirectoryManagementSystem* dms = DirectoryManagementSystem::GetInstance();
 	TimingWheel wheel(MAX_DELAY);
 
@@ -54,7 +58,7 @@ int main()
 
 	ofstream outputFile("status.txt");
 
-	queue<QueryRequest> queryQueue = generateQueryQueue(userInput.queryNum, MAX_DELAY);
+	queue<QueryRequest> queryQueue = generateQueryQueue(userInput.queryNum, MAX_DELAY, MIN_DELAY);
 	while (!queryQueue.empty() || !wheel.IsEmpty())
 	{
 		wheel.Schedule(*dms, queryQueue, availableServers);
@@ -69,6 +73,13 @@ int main()
 
 }
 
+
+/// <summary>
+/// Prints final statistics of the system by taking a look at the multiple components of the system
+/// </summary>
+/// <param name="wheel"></param>
+/// <param name="totalSimulationTime"></param>
+/// <param name="dms"></param>
 void printFinalStatistics(TimingWheel& wheel, int totalSimulationTime, DirectoryManagementSystem& dms)
 {
 	cout << "--------------------------- FINAL STATISTICS--------------------------------" << endl;
@@ -77,10 +88,22 @@ void printFinalStatistics(TimingWheel& wheel, int totalSimulationTime, Directory
 	cout << wheel.GetInternalStats();
 }
 
-void printStatus(ofstream& outputFile, queue<QueryRequest> requests, int totalSimulationTime, TimingWheel& wheel)
+
+/// <summary>
+/// Prints the status AFTER simulationTime passed. For example, if simulationTime = 0,
+/// it prints the state of the system after simulationTime 0 passed going for the next
+/// simulation time step.
+/// 
+/// It prints the status to both stdout and another file to persist the data.
+/// </summary>
+/// <param name="outputFile"></param>
+/// <param name="requests"></param>
+/// <param name="totalSimulationTime"></param>
+/// <param name="wheel"></param>
+void printStatus(ofstream& outputFile, queue<QueryRequest> requests, int simulationTime, TimingWheel& wheel)
 {
 	ostringstream buffer;
-	buffer << "Simulation time: " << totalSimulationTime << endl;
+	buffer << "Simulation time: " << simulationTime << endl;
 	buffer << "Query Queue: [";
 	while (!requests.empty())
 	{
@@ -94,6 +117,11 @@ void printStatus(ofstream& outputFile, queue<QueryRequest> requests, int totalSi
 	outputFile << buffer.str();
 }
 
+
+/// <summary>
+/// Gets all necessary information from the user for the program to run.
+/// </summary>
+/// <returns></returns>
 UserInput getUserInput()
 {
 
@@ -127,7 +155,15 @@ UserInput getUserInput()
 	return userInput;
 }
 
-queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay)
+/// <summary>
+/// Generates a query queue. Queries are QueryRequests, meaning they have
+/// a query but also a duration.
+/// </summary>
+/// <param name="queryNum"></param>
+/// <param name="maxDelay"></param>
+/// <param name="minDelay"></param>
+/// <returns></returns>
+queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay, int minDelay)
 {
 	queue<QueryRequest> queries;
 
@@ -137,7 +173,8 @@ queue<QueryRequest> generateQueryQueue(int queryNum, int maxDelay)
 	for (int i = 0; i < queryNum; i++)
 	{
 		option = rand() % totalOptions + 1;
-		int dueAfter = rand() % maxDelay + 1;
+		// Returns a random number between [minDelay, maxDelay]
+		int dueAfter = rand() % (maxDelay-minDelay+1) + minDelay;
 		BaseQuery* query = NULL;
 		switch (option)
 		{

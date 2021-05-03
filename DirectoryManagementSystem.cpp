@@ -173,7 +173,8 @@ void DirectoryManagementSystem::CreateBusinessContact(const vector<string>& word
 }
 
 /// <summary>
-/// Allows to find previous entered contacts
+/// Allows to find previous entered contacts. This allows appending information
+/// to a previously created contact.
 /// </summary>
 /// <param name="name">name of the contact</param>
 /// <param name="contactType">type of the contact</param>
@@ -205,7 +206,8 @@ void DirectoryManagementSystem::AddToQuickbook(const string& name, const string&
 }
 
 /// <summary>
-/// A utility function to trim left and right whitespaces from a string
+/// A utility function to trim left and right whitespaces from a string.
+/// Useful because we validate strings and it is whitespace sensitive.
 /// </summary>
 /// <param name="word"></param>
 /// <returns></returns>
