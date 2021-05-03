@@ -2,6 +2,21 @@
 
 using namespace std;
 
+DirectoryManagementSystem* DirectoryManagementSystem::Instance = nullptr;
+
+DirectoryManagementSystem* DirectoryManagementSystem::GetInstance()
+{
+	if (!Instance)
+		Instance = new DirectoryManagementSystem();
+	return Instance;
+}
+
+void DirectoryManagementSystem::DeleteInstance()
+{
+	if (Instance)
+		delete Instance;
+	Instance = nullptr;
+}
 /// <summary>
 /// Destructor needed because memory was allocated in the heap
 /// </summary>

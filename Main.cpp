@@ -36,14 +36,14 @@ int main()
 	// Needed information for simulation
 	int totalSimulationTime = 0;
 	const int MAX_DELAY = 10;
-	DirectoryManagementSystem dms;
+	DirectoryManagementSystem* dms = DirectoryManagementSystem::GetInstance();
 	TimingWheel wheel(MAX_DELAY);
 
 	UserInput userInput = getUserInput();
 	for (string fname : userInput.fileNames)
 	{
 		ifstream inputFile(fname); 
-		dms.IngestData(inputFile);
+		dms->IngestData(inputFile);
 	}
 
 	queue<int> availableServers;
@@ -57,13 +57,15 @@ int main()
 	queue<QueryRequest> queryQueue = generateQueryQueue(userInput.queryNum, MAX_DELAY);
 	while (!queryQueue.empty() || !wheel.IsEmpty())
 	{
-		wheel.Schedule(dms, queryQueue, availableServers);
+		wheel.Schedule(*dms, queryQueue, availableServers);
 		printStatus(outputFile, queryQueue,totalSimulationTime, wheel);
 		wheel.IncreaseInternalTime();
 		totalSimulationTime++;
 	}
 
 	printFinalStatistics(wheel, totalSimulationTime);
+
+	DirectoryManagementSystem::DeleteInstance();
 
 }
 

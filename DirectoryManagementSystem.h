@@ -23,8 +23,12 @@ using namespace std;
 class DirectoryManagementSystem
 {
 private:
+	static DirectoryManagementSystem* Instance;
+	~DirectoryManagementSystem();
+	DirectoryManagementSystem() {}
+	DirectoryManagementSystem& operator=(const DirectoryManagementSystem& dms){}
+	DirectoryManagementSystem(const DirectoryManagementSystem& dms){}
 	vector<Contact*> contacts;
-	int totalContacts;
 	string queryResult;
 	Validator validator;
 	CLIQueryEngine engine;
@@ -36,9 +40,10 @@ private:
 	vector<string> ParseLine(const string& line);
 	string TrimString(const string& word);
 public:
+	static DirectoryManagementSystem* GetInstance();
+	static void DeleteInstance();
 	void Query();
 	void DisplayResult();
-	~DirectoryManagementSystem();
 	void IngestData(std::istream& is);
 	void ShowAllContacts();
 	string TestABC() { return "abc"; }

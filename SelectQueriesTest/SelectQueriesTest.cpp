@@ -20,57 +20,61 @@ namespace SelectQueriesTest
 		{
 			string name = "W";
 			SearchPersonByName query(name);
-			DirectoryManagementSystem dms;
+			DirectoryManagementSystem* dms = DirectoryManagementSystem::GetInstance();
 
 			// We should give FULL path to the text file we are about to open
 			ifstream inputFile("C:\\Users\\cberr\\OneDrive\\Documents\\University of Bridgeport\\2021SP Semester\\C++\\DirectoryManagementSystem\\person-test.txt");
 			if (inputFile.is_open())
 			{
-				dms.IngestData(inputFile);
+				dms->IngestData(inputFile);
 			}
-			map<string, int> actual = query.Search(dms.GetContacts());
+			map<string, int> actual = query.Search(dms->GetContacts());
 			map<string, int> expected;
 			expected["Alaska"] = 1;
 			expected["Florida"] = 1;
 			expected["Tennessee"] = 1;
 			Assert::IsTrue(actual == expected);
+
+			DirectoryManagementSystem::DeleteInstance();
 		}
 
 		TEST_METHOD(QueryII)
 		{
 			string emailDomain = ".org";
 			SearchPersonByEmail query(emailDomain);
-			DirectoryManagementSystem dms;
+			DirectoryManagementSystem* dms = DirectoryManagementSystem::GetInstance();
 
 			// We should give FULL path to the text file we are about to open
 			ifstream inputFile("C:\\Users\\cberr\\OneDrive\\Documents\\University of Bridgeport\\2021SP Semester\\C++\\DirectoryManagementSystem\\person-test.txt");
 			if (inputFile.is_open())
 			{
-				dms.IngestData(inputFile);
+				dms->IngestData(inputFile);
 			}
-			map<string, int> actual = query.Search(dms.GetContacts());
+			map<string, int> actual = query.Search(dms->GetContacts());
 			map<string, int> expected;
 			expected["Female"] = 3;
 			expected["Male"] = 1;
 			Assert::IsTrue(actual == expected);
+			DirectoryManagementSystem::DeleteInstance();
 		}
 
 		TEST_METHOD(QueryIII)
 		{
 			string areaCode = "203";
 			SearchBusinessByPhoneNumber query(areaCode);
-			DirectoryManagementSystem dms;
+			DirectoryManagementSystem* dms = DirectoryManagementSystem::GetInstance();
 
 			// We should give FULL path to the text file we are about to open
 			ifstream inputFile("C:\\Users\\cberr\\OneDrive\\Documents\\University of Bridgeport\\2021SP Semester\\C++\\DirectoryManagementSystem\\business-test.txt");
 			if (inputFile.is_open())
 			{
-				dms.IngestData(inputFile);
+				dms->IngestData(inputFile);
 			}
-			map<string, int> actual = query.Search(dms.GetContacts());
+			map<string, int> actual = query.Search(dms->GetContacts());
 			map<string, int> expected;
 			expected["Tech"] = 1;
 			Assert::IsTrue(expected == actual);
+			DirectoryManagementSystem::DeleteInstance();
 		}
 
 		TEST_METHOD(QueryIV)
@@ -78,19 +82,20 @@ namespace SelectQueriesTest
 			string email = ".com";
 			string website = ".com";
 			SearchBusinessByEmailOrWebsite query(email, website);
-			DirectoryManagementSystem dms;
+			DirectoryManagementSystem* dms = DirectoryManagementSystem::GetInstance();
 			// We should give FULL path to the text file we are about to open
 			ifstream inputFile("C:\\Users\\cberr\\OneDrive\\Documents\\University of Bridgeport\\2021SP Semester\\C++\\DirectoryManagementSystem\\business-test.txt");
 			if (inputFile.is_open())
 			{
-				dms.IngestData(inputFile);
+				dms->IngestData(inputFile);
 			}
-			map<string, int> actual = query.Search(dms.GetContacts());
+			map<string, int> actual = query.Search(dms->GetContacts());
 			map<string, int> expected;
 			expected["Law"] = 2;
 			expected["Tech"] = 2;
 			expected["Pharma"] = 1;
 			Assert::IsTrue(expected == actual);
+			DirectoryManagementSystem::DeleteInstance();
 		}
 
 		TEST_METHOD(QueryV)
@@ -100,17 +105,18 @@ namespace SelectQueriesTest
 			AreaCodesBook book(areasFile);
 			string areaCode = "203";
 			SearchPeopleLivingInCT query(book, areaCode);
-			DirectoryManagementSystem dms;
+			DirectoryManagementSystem* dms = DirectoryManagementSystem::GetInstance();
 			// We should give FULL path to the text file we are about to open
 			ifstream inputFile("C:\\Users\\cberr\\OneDrive\\Documents\\University of Bridgeport\\2021SP Semester\\C++\\DirectoryManagementSystem\\person-test.txt");
 			if (inputFile.is_open())
 			{
-				dms.IngestData(inputFile);
+				dms->IngestData(inputFile);
 			}
-			map<string, int> actual = query.Search(dms.GetContacts());
+			map<string, int> actual = query.Search(dms->GetContacts());
 			map<string, int> expected;
 			expected["TX"] = 1;
 			Assert::IsTrue(expected == actual);
+			DirectoryManagementSystem::DeleteInstance();
 		}
 
 
