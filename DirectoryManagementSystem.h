@@ -46,7 +46,6 @@ public:
 	void DisplayResult();
 	void IngestData(std::istream& is);
 	void ShowAllContacts();
-	string TestABC() { return "abc"; }
 	vector<Contact*>& GetContacts() { return contacts; }
 	friend std::istream& operator>>(std::istream& is, DirectoryManagementSystem dms);
 	friend ostream& operator<<(ostream& os, DirectoryManagementSystem dms);
